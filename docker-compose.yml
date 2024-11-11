@@ -1,0 +1,46 @@
+version: "3.8"
+
+services:
+  # PostgreSQL para el microservicio de pacientes
+  db_pacientes:
+      image: postgres:latest
+      container_name: db_pacientes
+      environment:
+        POSTGRES_USER: pacientes_user
+        POSTGRES_PASSWORD: pacientes_password
+        POSTGRES_DB: pacientes_db
+      ports:
+        - "5432:5432"
+      volumes:
+        - pacientes_data:/var/lib/postgresql/data
+
+  # PostgreSQL para el microservicio de citas
+  db_citas:
+    image: postgres:latest
+    container_name: db_citas
+    environment:
+      POSTGRES_USER: citas_user
+      POSTGRES_PASSWORD: citas_password
+      POSTGRES_DB: citas_db
+    ports:
+      - "5433:5432" # Cambio del puerto para evitar conflictos
+    volumes:
+      - citas_data:/var/lib/postgresql/data
+
+  # MySQL para el microservicio de médicos
+  db_medicos:
+    image: mysql:latest
+    container_name: db_medicos
+    environment:
+      MYSQL_ROOT_PASSWORD: medicos_root_password
+      MYSQL_DATABASE: medicos_db
+      MYSQL_USER: medicos_user
+      MYSQL_PASSWORD: medicos_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - medicos_data:/var/lib/mysql
+volumes:
+  pacientes_data:
+  citas_data:
+  medicos_data:
