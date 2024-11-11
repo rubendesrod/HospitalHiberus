@@ -1,10 +1,22 @@
 import exppress from "express";
 import bodyParser from "body-parser";
 import { MedicoController } from "./controller/MedicoController";
+import swaggerUi from "swagger-ui-express";
+import swaggerJSDoc from "swagger-jsdoc";
+import swaggerDefinition from "./swagger";
+
+// Configuración para que swagger use la configuracion de la API definition
+const swaggerOptions = {
+  swaggerDefinition,
+  apis: ["./src/*.ts"],
+}
 
 const app = exppress();
 const PORT = 3000;
 const medicoController = new MedicoController();
+
+const swaggerSpec = swaggerJSDoc(swaggerOptions);
+app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use(bodyParser.json());
 

@@ -21,7 +21,7 @@ export class MedicoController {
       const medicoDni = req.params.dni;
 
       if (!medicoDni || medicoDni.trim().length === 0) {
-        res.status(400).send("El DNI proporcionado no es válido.");
+        res.status(400).send("El Dni proporcionado no es válido.");
         return;
       }
 
@@ -60,7 +60,7 @@ export class MedicoController {
     try {
       const medicoDni = req.params.dni;
       if (!medicoDni) {
-        res.status(400).send("El medico no esta dado alta");
+        res.status(404).send("El medico no esta dado alta");
       }
       const medicoActualizado = req.body;
       const medico = await medicoService.actualizarMedico(
