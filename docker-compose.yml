@@ -40,6 +40,7 @@ services:
       - "3306:3306"
     volumes:
       - medicos_data:/var/lib/mysql
+
 volumes:
   pacientes_data:
   citas_data:
