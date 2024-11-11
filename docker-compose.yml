@@ -37,7 +37,7 @@ services:
       MYSQL_USER: medicos_user
       MYSQL_PASSWORD: medicos_password
     ports:
-      - "3306:3306"
+      - "3307:3306"
     volumes:
       - medicos_data:/var/lib/mysql
 
