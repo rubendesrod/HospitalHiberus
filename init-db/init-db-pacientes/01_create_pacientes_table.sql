@@ -1,0 +1,8 @@
+CREATE TABLE IF NOT EXISTS pacientes (
+  dni VARCHAR(15) PRIMARY KEY,
+  nombre VARCHAR(100) NOT NULL,
+  apellidos VARCHAR(100) NOT NULL,
+  fechaNac DATE NOT NULL,
+  email VARCHAR(100) NOT NULL,
+  direccion VARCHAR(100) NOT NULL
+);

@@ -1,5 +1,4 @@
-version: "3.8"
-
+version: '3.8'
 services:
   # PostgreSQL para el microservicio de pacientes
   db_pacientes:
@@ -13,6 +12,7 @@ services:
         - "5432:5432"
       volumes:
         - pacientes_data:/var/lib/postgresql/data
+        - ./init-db/init-db-pacientes:/docker-entrypoint-initdb.d
 
   # PostgreSQL para el microservicio de citas
   db_citas:
@@ -40,6 +40,7 @@ services:
       - "3307:3306"
     volumes:
       - medicos_data:/var/lib/mysql
+      - ./init-db/init-db-medicos:/docker-entrypoint-initdb.d
 
 volumes:
   pacientes_data:

@@ -7,74 +7,94 @@
   <groupId>com.hospitalHiberus</groupId>
   <artifactId>HospitalHiberus</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <name>HospitalHiberus</name>
-  <modules>
-    <module>pacientes</module>
-  </modules>
   <packaging>pom</packaging>
 
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
     <version>2.7.5</version>
+    <relativePath/>
   </parent>
 
+  <modules>
+    <module>pacientes</module>
+  </modules>
+
   <properties>
-    <maven.compiler.source>11</maven.compiler.source>
-    <maven.compiler.target>11</maven.compiler.target>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <spring-cloud.version>2021.0.4</spring-cloud.version>
   </properties>
+
+  <repositories>
+    <repository>
+      <id>spring-releases</id>
+      <url>https://repo.spring.io/release</url>
+    </repository>
+    <repository>
+      <id>spring-milestones</id>
+      <url>https://repo.spring.io/milestone</url>
+    </repository>
+  </repositories>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-dependencies</artifactId>
+        <version>${spring-cloud.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-data-jpa</artifactId>
+      <version>2.7.5</version> <!-- Especifica la versión manualmente -->
     </dependency>
-
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
+      <version>2.7.5</version> <!-- Especifica la versión manualmente -->
       <scope>test</scope>
     </dependency>
-
+    <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>42.2.2</version>
+    </dependency>
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
+      <version>1.18.24</version> <!-- Especifica la versión de Lombok manualmente -->
       <optional>true</optional>
     </dependency>
-
-    <dependency>
-      <groupId>io.springfox</groupId>
-      <artifactId>springfox-swagger-ui</artifactId>
-      <version>2.8.0</version>
-    </dependency>
-
-    <dependency>
-      <groupId>io.springfox</groupId>
-      <artifactId>springfox-swagger2</artifactId>
-      <version>2.8.0</version>
-    </dependency>
-
   </dependencies>
 
   <build>
-        <plugins>
-            <plugin>
+    <plugins>
+      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.11.0</version>
         <configuration>
-          <source>17</source>
-          <target>17</target>
+          <source>${maven.compiler.source}</source>
+          <target>${maven.compiler.target}</target>
         </configuration>
-            </plugin>
+      </plugin>
+
+      <!-- JavaFX Plugin, solo si es necesario para el proyecto completo -->
       <plugin>
         <groupId>org.openjfx</groupId>
         <artifactId>javafx-maven-plugin</artifactId>
         <version>0.0.8</version>
         <executions>
           <execution>
-            <!-- Default configuration for running with: mvn clean javafx:run -->
             <id>default-cli</id>
             <configuration>
               <mainClass>com.hospitalhiberus.hospitalhiberus/com.hospitalhiberus.hospitalhiberus.HelloApplication</mainClass>
@@ -88,6 +108,6 @@
           </execution>
         </executions>
       </plugin>
-          </plugins>
+    </plugins>
   </build>
 </project>
