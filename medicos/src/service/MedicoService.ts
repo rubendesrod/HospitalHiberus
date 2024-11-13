@@ -2,7 +2,7 @@ import { createConnection, Connection, ResultSetHeader } from "mysql2/promise";
 import { Medico } from "../interface/MedicoInterface";
 
 export class MedicoService {
-  private conexion: Connection;
+  private conexion!: Connection;
 
   constructor() {
     // inicializa la conexión al ser creado
@@ -28,11 +28,11 @@ export class MedicoService {
 
   // Funcion para obtener un medico mediante su id (dni)
   async obtenerMedico(medicoDni: string): Promise<Medico | null> {
-    const [resultado] = await this.conexion.execute<ResultSetHeader>(
+    const [resultado] = await this.conexion.execute<any>(
       "SELECT * FROM medicos WHERE dni = ?",
       [medicoDni]
     );
-    if (resultado.affectedRows === 0) {
+    if (resultado.length === 0) {
       return null;
     }
     return resultado[0] as Medico;

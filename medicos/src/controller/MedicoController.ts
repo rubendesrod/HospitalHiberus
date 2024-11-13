@@ -46,6 +46,7 @@ export class MedicoController {
       const medicoCreado = await medicoService.darAltaMedico(nuevoMedico);
       if (!medicoCreado) {
         res.status(400).send("El medico no ha podido darse de alta");
+        return;
       }
       res.status(201).json({
         mensaje: "Médico creado correctamente",
@@ -87,7 +88,7 @@ export class MedicoController {
       if (!medicoDni) {
         res.status(404).send("El medico no esta dado de alta");
       }
-      res.status(200).send("El medico ha sido dado de baja");
+      res.status(204).send("El medico ha sido dado de baja");
     } catch (error) {
       res.status(500).send("Ha ocurrido un error");
     }
