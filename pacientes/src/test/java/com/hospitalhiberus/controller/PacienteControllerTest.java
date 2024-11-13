@@ -7,7 +7,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import static org.mockito.Mockito.verify;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,9 +15,7 @@ import java.time.LocalDate;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.when;
-
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 
 public class PacienteControllerTest {
@@ -96,31 +93,46 @@ public class PacienteControllerTest {
     }
 
     @Test
-    public void testUpdatePaciente(){
+    public void testUpdatePaciente() {
 
-        // Crear un paciente existente
+        // Creo un paciente existente
         LocalDate fechaNac = LocalDate.of(2002, 8, 4);
         Paciente paciente1 = new Paciente("12543674T", "Ruben", "Descalzo Rodriguez", fechaNac, "rubendes@hiberus.com", "C/ Maldonado 34, 5 Izq");
 
-        // Crear un paciente con datos actualizados
+        // Creo un paciente con datos actualizados
         Paciente pacienteUpdate = new Paciente("12543674T", "Raul", "Rodriguez Carrion", fechaNac, "rubendes@hiberus.com", "C/ Maldonado 34, 8 Izq");
 
-        // Simular que el paciente existe en el repositorio
-        when(pacienteRepository.findById("12543674T")).thenReturn(Optional.of(paciente1));
-        // Simular que el repositorio guarda el paciente actualizado
-        when(pacienteRepository.save(pacienteUpdate)).thenReturn(pacienteUpdate);
+        // Simulo que el paciente existe en el repositorio
+        when(pacienteRepository.findByDni("12543674T")).thenReturn(paciente1);
 
-        // Llamar al método de actualización en el controlador
+        // Simulo que el repositorio guarda el paciente actualizado
+        when(pacienteRepository.save(paciente1)).thenReturn(pacienteUpdate);
+
+        // Llamo al método de actualización en el controlador
         ResponseEntity<Paciente> response = pacienteController.actualizarPaciente("12543674T", pacienteUpdate);
 
-
-        // Verificar la respuesta y que los datos son los actualizados
-        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
-        //assertEquals("Raul", response.getBody().getNombre());
-        //assertEquals("Rodriguez Carrion", response.getBody().getApellidos());
-        //assertEquals("C/ Maldonado 34, 8 Izq", response.getBody().getDireccion());
+        // Verifico que el repositorio guardó el paciente actualizado
+        verify(pacienteRepository).save(paciente1);
 
 
-
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals("Raul", response.getBody().getNombre());
+        assertEquals("Rodriguez Carrion", response.getBody().getApellidos());
+        assertEquals("C/ Maldonado 34, 8 Izq", response.getBody().getDireccion());
     }
+
+    @Test
+    public void testDeletePaciente() {
+        // Simulo que el paciente existe en el repositorio
+        when(pacienteRepository.existsByDni("12543674T")).thenReturn(true);
+
+        // Llamo al método de eliminación en el controlador
+        ResponseEntity<Void> response = pacienteController.eliminarPaciente("12543674T");
+
+        // Verifico que el repositorio intenta eliminar el paciente
+        verify(pacienteRepository).deleteByDni("12543674T");
+
+        assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
+    }
+
 }
