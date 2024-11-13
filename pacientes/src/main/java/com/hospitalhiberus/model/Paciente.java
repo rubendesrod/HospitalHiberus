@@ -4,6 +4,7 @@ import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Builder
@@ -27,7 +28,7 @@ public class Paciente {
     private String apellidos;
 
     @Column(name = "fechaNac")
-    private Date fehcaNac;
+    private LocalDate fechaNac;
 
     @Column(name = "email")
     private String email;
@@ -41,7 +42,7 @@ public class Paciente {
                 "dni='" + dni + '\'' +
                 ", nombre='" + nombre + '\'' +
                 ", apellidos='" + apellidos + '\'' +
-                ", fehcaNac=" + fehcaNac +
+                ", fehcaNac=" + fechaNac +
                 ", email='" + email + '\'' +
                 ", direccion='" + direccion + '\'' +
                 '}';

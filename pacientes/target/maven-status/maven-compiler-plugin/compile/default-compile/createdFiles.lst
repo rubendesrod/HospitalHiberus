@@ -1,3 +1,4 @@
+com\hospitalhiberus\controller\PacienteControllerTest.class
 com\hospitalhiberus\model\Paciente$PacienteBuilder.class
 com\hospitalhiberus\repository\PacienteRepository.class
 com\hospitalhiberus\controller\PacienteController.class
