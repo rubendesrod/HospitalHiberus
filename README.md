@@ -8,7 +8,7 @@
 * Eureka server: http://localhost:8761
 * Gateway server: http://localhost:9000/
 
-### URLs al swagger
+#### URLs al swagger
 * Pacientes: http://localhost:8081/swagger-ui/index.html
 * Usuarios: http://localhost:8082/docs
 * Citas: 

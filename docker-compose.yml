@@ -1,18 +1,18 @@
-version: '3.8'
+version: "3.8"
 services:
   # PostgreSQL para el microservicio de pacientes
   db_pacientes:
-      image: postgres:latest
-      container_name: db_pacientes
-      environment:
-        POSTGRES_USER: pacientes_user
-        POSTGRES_PASSWORD: pacientes_password
-        POSTGRES_DB: pacientes_db
-      ports:
-        - "5432:5432"
-      volumes:
-        - pacientes_data:/var/lib/postgresql/data
-        - ./init-db/init-db-pacientes:/docker-entrypoint-initdb.d
+    image: postgres:latest
+    container_name: db_pacientes
+    environment:
+      POSTGRES_USER: pacientes_user
+      POSTGRES_PASSWORD: pacientes_password
+      POSTGRES_DB: pacientes_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pacientes_data:/var/lib/postgresql/data
+      - ./init-db/init-db-pacientes:/docker-entrypoint-initdb.d
 
   # PostgreSQL para el microservicio de citas
   db_citas:
@@ -26,6 +26,7 @@ services:
       - "5433:5432" # Cambio del puerto para evitar conflictos
     volumes:
       - citas_data:/var/lib/postgresql/data
+      - ./init-db/init-db-citas:/docker-entrypoint-initdb.d
 
   # MySQL para el microservicio de médicos
   db_medicos:
@@ -42,6 +43,7 @@ services:
       - medicos_data:/var/lib/mysql
       - ./init-db/init-db-medicos:/docker-entrypoint-initdb.d
 
+# Volumenes para la persistencia de los datos en la DB
 volumes:
   pacientes_data:
   citas_data:
