@@ -12,6 +12,8 @@
 * Pacientes: http://localhost:8081/swagger-ui/index.html
 * Usuarios: http://localhost:8082/docs
 * Citas: 
+* Histotrial Medico:
+* Facturas:
 
 ## Diagrama 🎛️
 //TODO

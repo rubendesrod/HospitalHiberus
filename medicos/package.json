@@ -12,6 +12,7 @@
   "devDependencies": {
     "@babel/preset-env": "^7.26.0",
     "@babel/preset-typescript": "^7.26.0",
+    "@types/eureka-js-client": "^4.5.9",
     "@types/express": "^5.0.0",
     "@types/jest": "^29.5.14",
     "@types/mysql2": "github:types/mysql2",
@@ -28,6 +29,8 @@
     "typescript": "^5.6.3"
   },
   "dependencies": {
+    "axios": "^1.7.7",
+    "eureka-js-client": "^4.5.0",
     "express": "^4.21.1",
     "mysql2": "^3.11.4",
     "swagger-jsdoc": "^6.2.8",

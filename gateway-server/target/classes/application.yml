@@ -11,10 +11,13 @@ spring:
           uri: lb://pacientes
           predicates:
             - Path=/pacientes/**
+        - id: micro-medicos
+          uri: lb://medicos
+          predicates:
+            - Path=/medicos/**
     discovery:
       locator:
         enabled: true
-
 eureka:
   client:
     service-url:

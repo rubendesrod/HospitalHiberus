@@ -19,7 +19,7 @@ public class OpenApiConfig {
     @Bean
     public Info apiInfo() {
         return new Info()
-                .title("Pacientes API")
+                .title("API pacientes")
                 .description("API Rest para gestionar los pacientes")
                 .version("v1");
     }

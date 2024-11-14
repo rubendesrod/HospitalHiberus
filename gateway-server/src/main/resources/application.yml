@@ -12,9 +12,9 @@ spring:
           predicates:
             - Path=/pacientes/**
         - id: micro-medicos
-          uri: http://localhost:3000
+          uri: lb://medicos
           predicates:
-            -Path:/medicos/**
+            - Path=/medicos/**
     discovery:
       locator:
         enabled: true
