@@ -4,7 +4,14 @@
 //TODO
 
 ## Documentación 🗒️
-//TODO
+* Config server: Config server: http://localhost:8888/<nombre_servicio>/default
+* Eureka server: http://localhost:8761
+* Gateway server: http://localhost:9000/
+
+### URLs al swagger
+* Pacientes: http://localhost:8081/swagger-ui/index.html
+* Usuarios: http://localhost:8082/docs
+* Citas: 
 
 ## Diagrama 🎛️
 //TODO
@@ -13,9 +20,9 @@
 ##### API realizada como trabajo en la Hiberus University, cuenta con diferentes tecnologías y lenguajes, encargada de realizar:
 1. CRUD de clientes
 2. CRUD de médicos
-3. CRUD de citas
-4. Creación de un historial médico
-5. Creación de las Facturaciones y del pago de estas
+3. CRUD de citas + funcionalidades extras
+4. Creación de un historial médico y consulta del mismo
+5. Creación de las Facturaciones, pago de estas y consulta
 
 ## Tecnologias
 ### comunicación y despliegue

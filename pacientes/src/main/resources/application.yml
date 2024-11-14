@@ -1,22 +1,17 @@
 spring:
+  application:
+    name: pacientes
   cloud:
     config:
-      enabled: false
-  mvc:
-    pathmatch:
-      matching-strategy: ant_path_matcher
-  datasource:
-    url: jdbc:postgresql://localhost:5432/pacientes_db
-    username: pacientes_user
-    password: pacientes_password
-    driver-class-name: org.postgresql.Driver
-
-  jpa:
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
-    hibernate:
-      ddl-auto: update
-    show-sql: true
+      uri: http://localhost:8888
 
 eureka:
   client:
-    enabled: false
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+    register-with-eureka: true
+    fetch-registry: true
+
+# Activo el perfil default para que obtenga la configuración del Config Server
+profiles:
+  active: default

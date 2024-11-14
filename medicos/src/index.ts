@@ -41,7 +41,7 @@ export const createServer = () => {
 
 
 if (require.main === module) {
-  const PORT = 3000;
+  const PORT = 8082;
   const app = createServer();
   app.listen(PORT, () => {
     console.log(`Servidor en el puerto ${PORT}, URL SWAGGER: http://localhost:${PORT}/docs/`);
