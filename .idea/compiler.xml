@@ -9,6 +9,7 @@
         <module name="pacientes" />
         <module name="config-server" />
         <module name="gateway-server" />
+        <module name="citas" />
         <module name="eureka-server" />
       </profile>
     </annotationProcessing>
@@ -16,6 +17,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="HospitalHiberus" options="-parameters" />
+      <module name="citas" options="-parameters" />
       <module name="config-server" options="-parameters" />
       <module name="eureka-server" options="-parameters" />
       <module name="gateway-server" options="-parameters" />

@@ -21,6 +21,7 @@
     <module>config-server</module>
     <module>eureka-server</module>
     <module>gateway-server</module>
+      <module>citas</module>
   </modules>
 
   <properties>

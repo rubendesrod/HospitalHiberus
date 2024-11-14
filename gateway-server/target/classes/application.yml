@@ -15,6 +15,10 @@ spring:
           uri: lb://medicos
           predicates:
             - Path=/medicos/**
+        - id: micro-citas
+          uri: lb://citas
+          predicates:
+            - Path=/citas/**
     discovery:
       locator:
         enabled: true
