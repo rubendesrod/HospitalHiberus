@@ -17,10 +17,6 @@
 logs/
 **/log/
 
-# Archivos específicos de sistema
-.DS_Store
-Thumbs.db
-
 # Node.js
 node_modules/
 npm-debug.log*

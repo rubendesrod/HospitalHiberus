@@ -1,6 +1,0 @@
-com\hospitalhiberus\model\Paciente$PacienteBuilder.class
-com\hospitalhiberus\repository\PacienteRepository.class
-com\hospitalhiberus\OpenApiConfig.class
-com\hospitalhiberus\controller\PacienteController.class
-com\hospitalhiberus\ApplicationPacientes.class
-com\hospitalhiberus\model\Paciente.class
