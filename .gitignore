@@ -1,0 +1,40 @@
+# Java
+*.class
+*.jar
+*.war
+*.ear
+
+# Directorios de compilación de Maven
+**/target/
+
+# Configuración de IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+
+# Logs
+*.log
+logs/
+**/log/
+
+# Archivos específicos de sistema
+.DS_Store
+Thumbs.db
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Docker
+**/docker-compose.override.yml
+*.env
+
+# Archivos de configuración local
+.env
+*.env.local
+
+# Archivos temporales
+*.tmp
+*.swp
