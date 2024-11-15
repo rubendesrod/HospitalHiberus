@@ -22,6 +22,7 @@
     <module>eureka-server</module>
     <module>gateway-server</module>
       <module>citas</module>
+      <module>consultador-hisotorialMedico</module>
   </modules>
 
   <properties>
@@ -57,20 +58,9 @@
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-data-jpa</artifactId>
-      <version>2.7.5</version> <!-- Especifica la versión manualmente -->
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
       <version>2.7.5</version> <!-- Especifica la versión manualmente -->
       <scope>test</scope>
-    </dependency>
-    <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
-    <dependency>
-      <groupId>org.postgresql</groupId>
-      <artifactId>postgresql</artifactId>
-      <version>42.2.2</version>
     </dependency>
     <dependency>
       <groupId>org.projectlombok</groupId>
@@ -79,7 +69,6 @@
       <optional>true</optional>
     </dependency>
   </dependencies>
-
   <build>
     <plugins>
       <plugin>

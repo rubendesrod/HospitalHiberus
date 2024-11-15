@@ -7,13 +7,13 @@
 * Config server: Config server: http://localhost:8888/<nombre_servicio>/default
 * Eureka server: http://localhost:8761
 * Gateway server: http://localhost:9000/<servicio>
-* Kowl (Interfaz Kafka): http://localhost:8087/topics
+* Kowl (Interfaz para Kafka): http://localhost:8087/topics
 
 #### URLs al swagger
 * Pacientes: http://localhost:8081/swagger-ui/index.html
 * Usuarios: http://localhost:8082/docs
 * Citas: 
-* Histotrial Medico:
+* Histotrial Medico: http://localhost:8084/swagger-ui/index.html
 * Facturas:
 
 ## Diagrama 🎛️

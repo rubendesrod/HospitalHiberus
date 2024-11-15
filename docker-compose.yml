@@ -120,10 +120,57 @@ services:
       - ./init-db/init-db-medicos:/docker-entrypoint-initdb.d
 
   # MongoDB para microservicio historialMedico
+  db_historialMedico:
+    image: mongo:6.0
+    container_name: db_historialMedico
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_DATABASE: historialmedico_db
+      MONGO_INITDB_ROOT_USERNAME: historialMedico_root
+      MONGO_INITDB_ROOT_PASSWORD: historialMedico_rootpassword
+    volumes:
+      - historialMedico_data:/data/db
+      - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js
+
   # MySQL para el microservicio facturas
+  db_facturas:
+    image: mysql:latest
+    container_name: db_facturas
+    environment:
+      MYSQL_ROOT_PASSWORD: facturas_root_password
+      MYSQL_DATABASE: facturas_db
+      MYSQL_USER: facturas_user
+      MYSQL_PASSWORD: facturas_password
+    ports:
+      - "3308:3306"
+    volumes:
+      - facturas_data:/var/lib/mysql
+      - ./init-db/init-db-facturas:/docker-entrypoint-initdb.d
+
+  # Config server
+
+  # Eureka server
+
+  # Gateway server
+
+  # Microservicio Medicos
+
+  # Microservicio Pacientes
+
+  # Microservicio Citas
+
+  # Microservicio facturas
+
+  # Microservicio consultador-historialMedico
+
+  # Microservicio consumer-historialMedico
+
 
 # Volumenes para la persistencia de los datos en la DB
 volumes:
   pacientes_data:
   citas_data:
   medicos_data:
+  historialMedico_data:
+  facturas_data:

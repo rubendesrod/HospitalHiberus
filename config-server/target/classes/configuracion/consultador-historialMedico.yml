@@ -1,0 +1,7 @@
+server:
+  port: 8084
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb://historialmedico_user:historialmedico_password@localhost:27017/historialmedico_db

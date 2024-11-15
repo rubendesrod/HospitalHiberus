@@ -10,6 +10,7 @@
         <module name="config-server" />
         <module name="gateway-server" />
         <module name="citas" />
+        <module name="consultador-hisotorialMedico" />
         <module name="eureka-server" />
       </profile>
     </annotationProcessing>
@@ -19,6 +20,7 @@
       <module name="HospitalHiberus" options="-parameters" />
       <module name="citas" options="-parameters" />
       <module name="config-server" options="-parameters" />
+      <module name="consultador-hisotorialMedico" options="-parameters" />
       <module name="eureka-server" options="-parameters" />
       <module name="gateway-server" options="-parameters" />
       <module name="pacientes" options="-parameters" />
