@@ -12,8 +12,8 @@
 #### URLs al swagger
 * Pacientes: http://localhost:8081/swagger-ui/index.html
 * Usuarios: http://localhost:8082/docs
-* Citas: 
-* Histotrial Medico: http://localhost:8084/swagger-ui/index.html
+* Citas: ❌ http://localhost:8083/swagger-ui/index.html ❌
+* Consultador Histotrial Médico: http://localhost:8084/swagger-ui/index.html
 * Facturas:
 
 ## Diagrama 🎛️

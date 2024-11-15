@@ -22,7 +22,7 @@
     <module>eureka-server</module>
     <module>gateway-server</module>
       <module>citas</module>
-      <module>consultador-hisotorialMedico</module>
+      <module>consultador-historialMedico</module>
   </modules>
 
   <properties>
