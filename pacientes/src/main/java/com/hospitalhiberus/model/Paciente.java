@@ -9,8 +9,8 @@ import java.util.Date;
 
 @Builder
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
+@AllArgsConstructor
 @Table(name = "pacientes")
 @EntityListeners(AuditingEntityListener.class)
 @Getter

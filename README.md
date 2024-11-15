@@ -6,7 +6,8 @@
 ## Documentación 🗒️
 * Config server: Config server: http://localhost:8888/<nombre_servicio>/default
 * Eureka server: http://localhost:8761
-* Gateway server: http://localhost:9000/
+* Gateway server: http://localhost:9000/<servicio>
+* Kowl (Interfaz Kafka): http://localhost:8087/topics
 
 #### URLs al swagger
 * Pacientes: http://localhost:8081/swagger-ui/index.html
