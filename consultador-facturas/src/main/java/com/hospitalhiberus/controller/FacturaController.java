@@ -27,7 +27,7 @@ public class FacturaController {
         return service.obtenerFacturasMedico(dni);
     }
 
-    @GetMapping("/facturas/{dni}{estado}")
+    @GetMapping("/facturas/{dni}/{estado}")
     public  List<Factura> obtenerFacturasDeUnMedicoYEstados(@PathVariable(name = "dni") String dni, @PathVariable (name="estado") ESTADOS estado){
         return service.obtenerFacturasMedicoConEstado(dni, estado);
     }

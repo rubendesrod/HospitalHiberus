@@ -8,7 +8,8 @@ import java.util.List;
 
 public interface FacturaRepository extends JpaRepository<Factura, Integer> {
 
-    List<Factura> finByIdMedico(String idMedico);
-    List<Factura> findByIdMedicoAndEstado(String idMedico, ESTADOS estado);
 
+    List<Factura> findByIdMedico(String id_medico);
+
+    List<Factura> findByIdMedicoAndEstado(String idMedico, ESTADOS estado);
 }

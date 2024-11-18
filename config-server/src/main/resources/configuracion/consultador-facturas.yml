@@ -3,7 +3,7 @@ server:
 
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3308/db_facturas
+    url: jdbc:mysql://localhost:3308/facturas_db
     username: facturas_user
     password: facturas_password
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -11,3 +11,12 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQLDialect
+
+logging:
+  level:
+    org.hibernate.SQL: DEBUG # Muestra las consultas SQL generadas
+    org.hibernate.type.descriptor.sql: TRACE # Muestra los valores de los parámetros en las consultas

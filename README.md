@@ -15,7 +15,7 @@
 * Usuarios: http://localhost:8082/docs
 * Citas: ❌ http://localhost:8083/swagger-ui/index.html ❌
 * Consultador Histotrial Médico: http://localhost:8084/swagger-ui/index.html
-* Consultador de Facturas:❌ http://localhost:8085/swagger-ui/index.html ❌
+* Consultador de Facturas: http://localhost:8085/swagger-ui/index.html
 
 ## Diagrama 🎛️
 //TODO

@@ -1,6 +1,6 @@
 package com.hospitalhiberus.model;
 
-import lombok.*;
+import lombok.Data;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -13,24 +13,23 @@ import java.time.LocalDate;
 public class Factura {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_factura")
-    private Integer id_factura;
+    private Integer idFactura;
 
     @Column(name = "id_medico")
-    private String id_medico;
+    private String idMedico;
 
-    @Column(name = "fechaEmision")
+    @Column(name = "fecha_emision")
     private LocalDate fechaEmision;
 
-    @Column(name = "totalPagar")
+    @Column(name = "total_pagar")
     private Integer totalPagar;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "estado")
     private ESTADOS estado;
 
-    @Column(name = "fechaPago")
+    @Column(name = "fecha_pago")
     private LocalDate fechaPago;
-
-
 }
