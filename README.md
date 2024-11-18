@@ -1,7 +1,7 @@
 # 🏥 Hospital Hiberus 🏥
 
 ## Guía de uso 📋
-//TODO
+// TODO:
 
 ## Documentación 🗒️
 * Config server: http://localhost:8888/<nombre_servicio>/default
