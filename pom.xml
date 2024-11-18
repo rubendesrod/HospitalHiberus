@@ -21,8 +21,9 @@
     <module>config-server</module>
     <module>eureka-server</module>
     <module>gateway-server</module>
-      <module>citas</module>
-      <module>consultador-historialMedico</module>
+    <module>citas</module>
+    <module>consultador-historialMedico</module>
+    <module>consultador-facturas</module>
   </modules>
 
   <properties>
@@ -59,13 +60,13 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
-      <version>2.7.5</version> <!-- Especifica la versión manualmente -->
+      <version>2.7.5</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
-      <version>1.18.24</version> <!-- Especifica la versión de Lombok manualmente -->
+      <version>1.18.24</version>
       <optional>true</optional>
     </dependency>
   </dependencies>

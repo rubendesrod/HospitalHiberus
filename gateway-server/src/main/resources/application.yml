@@ -23,6 +23,10 @@ spring:
           uri: lb://consultador-historialmedico
           predicates:
             - Path=/historiales/**
+        - id: micro-consultador-facturas
+          uri: lb://consultador-facturas
+          predicates:
+            - Path=/facturas/**
     discovery:
       locator:
         enabled: true

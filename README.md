@@ -4,17 +4,18 @@
 //TODO
 
 ## Documentación 🗒️
-* Config server: Config server: http://localhost:8888/<nombre_servicio>/default
+* Config server: http://localhost:8888/<nombre_servicio>/default
 * Eureka server: http://localhost:8761
 * Gateway server: http://localhost:9000/<servicio>
 * Kowl (Interfaz para Kafka): http://localhost:8087/topics
+* Zipkin (Monitorización): 
 
 #### URLs al swagger
 * Pacientes: http://localhost:8081/swagger-ui/index.html
 * Usuarios: http://localhost:8082/docs
 * Citas: ❌ http://localhost:8083/swagger-ui/index.html ❌
 * Consultador Histotrial Médico: http://localhost:8084/swagger-ui/index.html
-* Facturas:
+* Consultador de Facturas:❌ http://localhost:8085/swagger-ui/index.html ❌
 
 ## Diagrama 🎛️
 //TODO
