@@ -1,3 +1,7 @@
 kafka:
   brokers:
     - kafka:29092
+  schemaRegistry:
+    enabled: true
+    urls:
+      - http://schema-registry:8080

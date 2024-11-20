@@ -24,6 +24,7 @@
     <module>citas</module>
     <module>consultador-historialMedico</module>
     <module>consultador-facturas</module>
+    <module>consumer-historialMedico</module>
   </modules>
 
   <properties>

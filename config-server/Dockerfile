@@ -1,11 +1,6 @@
-# Imagen de Java
 FROM openjdk:17-jdk-slim
-
-# Añado el jar de la aplicación al contenedor
-ARG JAR_FILE=target/*.jar
-COPY ${JAR_FILE} app.jar
-
-# Expone el puerto en el que el servicio corre
+ADD target/*.jar app.jar
 EXPOSE 8888
+
 # Ejecuta la aplicación
-ENTRYPOINT ["java", "-jar", "/app.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]

@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: consumer-historialMedico
+  cloud:
+    config:
+      uri: http://localhost:8888
+
+# Activo el perfil default para que obtenga la configuración del Config Server
+profiles:
+  active: default

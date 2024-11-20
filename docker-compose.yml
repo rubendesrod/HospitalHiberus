@@ -43,6 +43,21 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     restart: always
 
+  # Inicialicacion de los topics de kafka mediante comando
+  init-kafka:
+    image: confluentinc/cp-enterprise-kafka:6.1.1
+    depends_on:
+      - kafka
+    entrypoint: [ '/bin/sh', '-c' ]
+    command: >
+      kafka-topics --bootstrap-server kafka:29092 --list &&
+      echo 'Creating kafka topics' &&
+      kafka-topics --bootstrap-server kafka:29092 --create --if-not-exists --topic historialMedico --replication-factor 1 --partitions 1 &&
+      kafka-topics --bootstrap-server kafka:29092 --create --if-not-exists --topic facturas --replication-factor 1 --partitions 1 &&
+      kafka-topics --bootstrap-server kafka:29092 --create --if-not-exists --topic facturasPagadas --replication-factor 1 --partitions 1 &&
+      echo 'Successfully created the following topics:' &&
+      kafka-topics --bootstrap-server kafka:29092 --list
+
   # Schema Registry
   schema-registry:
     image: confluentinc/cp-schema-registry:6.1.1

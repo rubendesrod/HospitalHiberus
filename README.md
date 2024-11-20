@@ -18,7 +18,7 @@
 * Consultador de Facturas: http://localhost:8085/swagger-ui/index.html
 
 ## Diagrama 🎛️
-//TODO
+![Diagrama.png](imagenes%2FDiagrama.png)
 
 ## Descripción
 ##### API realizada como trabajo en la Hiberus University, cuenta con diferentes tecnologías y lenguajes, encargada de realizar:
