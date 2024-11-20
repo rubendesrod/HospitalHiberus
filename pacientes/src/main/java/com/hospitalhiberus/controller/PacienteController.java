@@ -26,6 +26,7 @@ public class PacienteController {
 
     @PostMapping("/pacientes")
     public ResponseEntity<Paciente> crearPaciente(@RequestBody Paciente paciente){
+        System.out.println("Datos recibidos: " + paciente);
         if (pacienteRepository.existsByDni(paciente.getDni())) {
             return new ResponseEntity<>(HttpStatus.CONFLICT); // Si el DNI ya existe
         }
@@ -52,7 +53,7 @@ public class PacienteController {
 
         pacienteActual.setNombre(paciente.getNombre());
         pacienteActual.setApellidos(paciente.getApellidos());
-        pacienteActual.setFechaNac(paciente.getFechaNac());
+        pacienteActual.setFechanac(paciente.getFechanac());
         pacienteActual.setEmail(paciente.getEmail());
         pacienteActual.setDireccion(paciente.getDireccion());
 

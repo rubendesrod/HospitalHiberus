@@ -1,0 +1,433 @@
+{
+	"info": {
+		"_postman_id": "5e208cf3-4eb8-4f74-88b3-8249e41e8a3f",
+		"name": "Hospital_Hiberus",
+		"description": "- Hiberus University Hospital",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32811730"
+	},
+	"item": [
+		{
+			"name": "Medicos",
+			"item": [
+				{
+					"name": "Obtener Medicos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8082/medicos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"medicos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Medico DNI",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9000/medicos/:dni",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"medicos",
+								":dni"
+							],
+							"variable": [
+								{
+									"key": "dni",
+									"value": "12508523L"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alta de un Medico",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"dni\": \"12508523L\",\r\n  \"nombre\": \"Dr. Juan Pérez\",\r\n  \"especialidad\": \"Cardiología\",\r\n  \"telefono\": \"+34 612 345 678\",\r\n  \"horario\": \"Lunes a Viernes, 9:00 - 18:00\",\r\n  \"sala\": \"Sala 3A\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/medicos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"medicos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Medico",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"Dr. Juan Salateo\",\r\n  \"especialidad\": \"Cardiología\",\r\n  \"telefono\": \"+36 612 345 678\",\r\n  \"horario\": \"Lunes a Viernes, 9:00 - 18:00\",\r\n  \"sala\": \"Sala 48A\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/medicos/:dni",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"medicos",
+								":dni"
+							],
+							"variable": [
+								{
+									"key": "dni",
+									"value": "12508523L"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Baja de un Medico",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9000/medicos/:dni",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"medicos",
+								":dni"
+							],
+							"variable": [
+								{
+									"key": "dni",
+									"value": "12508523L"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pacientes",
+			"item": [
+				{
+					"name": "Obtener Pacientes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9000/pacientes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"pacientes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Pacientes por DNI",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9000/pacientes/:dni",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"pacientes",
+								":dni"
+							],
+							"variable": [
+								{
+									"key": "dni",
+									"value": "12508523L"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alta de un paciente",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"dni\": \"12508523L\",\r\n  \"nombre\": \"Rubén\",\r\n  \"apellidos\": \"Descalzo Rodríguez\",\r\n  \"email\": \"rubendescalzoro@gmail.com\",\r\n  \"fechaNac\": \"2002-08-02\",\r\n  \"direccion\": \"c/ Barrio las cañas nº1, Bajo B\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/pacientes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"pacientes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar datos Paciente",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"dni\": \"12508523L\",\r\n  \"nombre\": \"Rubén\",\r\n  \"apellidos\": \"Descalzo Rodríguez\",\r\n  \"email\": \"rubendescalzoro@gmail.com\",\r\n  \"fechaNac\": \"04-08-2002\",\r\n  \"direccion\": \"c/ Barrio las cañas nº1, Bajo B\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/pacientes/:dni",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"pacientes",
+								":dni"
+							],
+							"variable": [
+								{
+									"key": "dni",
+									"value": "12508523L"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Baja de un Paciente",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/pacientes/:dni",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"pacientes",
+								":dni"
+							],
+							"variable": [
+								{
+									"key": "dni",
+									"value": "12508523L"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Citas",
+			"item": []
+		},
+		{
+			"name": "consultador-historialmedico",
+			"item": [
+				{
+					"name": "Obtener todos los Historiales Medicos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9000/historiales",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"historiales"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Historial Medico de un paciente",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9000/historiales/:dni",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"historiales",
+								":dni"
+							],
+							"variable": [
+								{
+									"key": "dni",
+									"value": "12508523L"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "consultador-facturas",
+			"item": [
+				{
+					"name": "Obtener Facturas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9000/facturas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"facturas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Facturas Pendientes de un Medico",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9000/facturas/:dni",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"facturas",
+								":dni"
+							],
+							"variable": [
+								{
+									"key": "dni",
+									"value": "12345678A"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Facturas Pagadas de un Medico",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9000/facturas/:dni/:estado",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"facturas",
+								":dni",
+								":estado"
+							],
+							"variable": [
+								{
+									"key": "dni",
+									"value": "12345678A"
+								},
+								{
+									"key": "estado",
+									"value": "pagado"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

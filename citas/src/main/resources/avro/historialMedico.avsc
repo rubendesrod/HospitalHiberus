@@ -1,0 +1,29 @@
+{
+  "type": "record",
+  "name": "HistorialMedico",
+  "namespace": "com.hospitalhiberus.avro",
+  "fields": [
+    {"name": "idHistorial", "type": "int"},
+    {"name": "idPaciente", "type": "string"},
+    {"name": "fecha", "type": "string"},
+    {
+      "name": "visitas",
+      "type": {
+        "type": "array",
+        "items": {
+          "type": "record",
+          "name": "Visita",
+          "fields": [
+            {"name": "fechaVisita", "type": "string"},
+            {"name": "hora", "type": "string"},
+            {
+              "name": "tratamiento",
+              "type": {"type": "array", "items": "string"}
+            },
+            {"name": "motivo", "type": "string"}
+          ]
+        }
+      }
+    }
+  ]
+}

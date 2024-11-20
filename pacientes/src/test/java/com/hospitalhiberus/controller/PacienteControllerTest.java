@@ -55,8 +55,8 @@ public class PacienteControllerTest {
     @Test
     public void testGetPaciente(){
         // Seteo la fecha del paciente
-        LocalDate fechaNac = LocalDate.of(2002, 8, 4);
-        Paciente paciente1 = new Paciente("12543674T", "Ruben", "Descalzo Rodriguez", fechaNac, "rubendes@hiberus.com", "C/ Maldonado 34, 5 Izq");
+        LocalDate fechanac = LocalDate.of(2002, 8, 4);
+        Paciente paciente1 = new Paciente("12543674T", "Ruben", "Descalzo Rodriguez", fechanac, "rubendes@hiberus.com", "C/ Maldonado 34, 5 Izq");
 
         when(pacienteRepository.findByDni("12543674T")).thenReturn(paciente1);
 

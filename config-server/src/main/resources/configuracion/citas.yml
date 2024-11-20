@@ -2,6 +2,13 @@ server:
   port: 8083
 
 spring:
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+      properties:
+        schema.registry.url: http://schema-registry:8080
   datasource:
     url: jdbc:postgresql://localhost:5433/citas_db
     username: citas_user
@@ -12,3 +19,18 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+    properties:
+      hibernate:
+        format_sql: true  # Para formatear las consultas SQL en los logs
+        use_sql_comments: true  # Añade comentarios en las consultas
+        type:
+          # Muestra los valores enlazados en las consultas
+          descriptor:
+            sql:
+              BasicBinder: TRACE
+
+logging:
+  level:
+    org.hibernate.SQL: DEBUG  # Muestra las consultas SQL generadas por Hibernate
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE  # Muestra los valores enlazados en las consultas
+    org.springframework: INFO  # Ajusta según sea necesario para limitar la verbosidad

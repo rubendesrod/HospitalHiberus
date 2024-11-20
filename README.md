@@ -12,32 +12,37 @@
 
 #### URLs al swagger
 * Pacientes: http://localhost:8081/swagger-ui/index.html
-* Usuarios: http://localhost:8082/docs
-* Citas: ❌ http://localhost:8083/swagger-ui/index.html ❌
+* Medicos: http://localhost:8082/docs
+* Citas: http://localhost:8083/swagger-ui/index.html
 * Consultador Histotrial Médico: http://localhost:8084/swagger-ui/index.html
 * Consultador de Facturas: http://localhost:8085/swagger-ui/index.html
 
 ## Diagrama 🎛️
 ![Diagrama.png](imagenes%2FDiagrama.png)
 
+## Pruebas
+* todos los test contienen test Unitarios con Mockito
+* las pruebas de conexión se realizan con postmas [Fichero->Hospital_Hiberus.postman_collection.json]
+
 ## Descripción
 ##### API realizada como trabajo en la Hiberus University, cuenta con diferentes tecnologías y lenguajes, encargada de realizar:
 1. CRUD de clientes
 2. CRUD de médicos
-3. CRUD de citas + funcionalidades extras
-4. Creación de un historial médico y consulta del mismo
-5. Creación de las Facturaciones, pago de estas y consulta
+3. CRUD de citas + comunicacion con otros servicio + producer a topics
+4. consultador-historialMedico atiende peticiones get y obtiene datos de la DB
+5. consumer-historiaMedico escucha la cola de mensajes en un topic
+6. consumer-facturas escucha de 2 topics, uno para la creación de la factura y otro para la confirmacion del pago
+7. consultador-facturas atiende peticiones get y obtiene mensaje de la DB
 
 ## Tecnologias
 ### comunicación y despliegue
-* Spring cloud:
-  * Config Server
-  * Gateway
-  * Eureka
+* Spring cloud [Config Server, Gateway, Eureka]
 * Kafka
+* Zipkin
 * Docker
+* github
 
-### SGBD
+### Sistemas gestores de Bases de datos
 * MongoDB
 * PostgreSQL
 * MySQL
@@ -48,4 +53,4 @@
 
 
 ## Autor
-#### © Rubén Descalzo Rodríguez
+### © Rubén Descalzo Rodríguez

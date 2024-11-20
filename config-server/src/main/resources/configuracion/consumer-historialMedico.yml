@@ -1,10 +1,13 @@
+server:
+  port: 8088
+
 spring:
   kafka:
     bootstrap-servers: localhost:9092
     consumer:
       group-id: historial-medico-consumer
       auto-offset-reset: earliest
-      key-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
       properties:
         schema.registry.url: http://schema-registry:8080

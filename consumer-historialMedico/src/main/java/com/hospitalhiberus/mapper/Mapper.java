@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public final class Mapper {
+public class Mapper {
 
     public HistorialMedico mapperHistorial(com.hospitalhiberus.avro.HistorialMedico historialAvro, List<Visita> visitas){
         HistorialMedico historial = new HistorialMedico();

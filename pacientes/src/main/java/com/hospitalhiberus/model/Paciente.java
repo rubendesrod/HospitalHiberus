@@ -1,5 +1,7 @@
 package com.hospitalhiberus.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -7,14 +9,11 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Date;
 
-@Builder
-@NoArgsConstructor
+@Data
 @Entity
-@AllArgsConstructor
 @Table(name = "pacientes")
 @EntityListeners(AuditingEntityListener.class)
-@Getter
-@Setter
+@AllArgsConstructor
 public class Paciente {
 
     @Id
@@ -27,8 +26,10 @@ public class Paciente {
     @Column(name = "apellidos")
     private String apellidos;
 
-    @Column(name = "fechaNac")
-    private LocalDate fechaNac;
+    @Column(name = "fechanac")
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @Schema(example = "2002-04-08")
+    private LocalDate fechanac;
 
     @Column(name = "email")
     private String email;
@@ -36,15 +37,4 @@ public class Paciente {
     @Column(name = "direccion")
     private String direccion;
 
-    @Override
-    public String toString() {
-        return "Paciente{" +
-                "dni='" + dni + '\'' +
-                ", nombre='" + nombre + '\'' +
-                ", apellidos='" + apellidos + '\'' +
-                ", fehcaNac=" + fechaNac +
-                ", email='" + email + '\'' +
-                ", direccion='" + direccion + '\'' +
-                '}';
-    }
 }
