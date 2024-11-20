@@ -13,6 +13,7 @@ import java.util.Date;
 @Entity
 @Table(name = "pacientes")
 @EntityListeners(AuditingEntityListener.class)
+@NoArgsConstructor
 @AllArgsConstructor
 public class Paciente {
 

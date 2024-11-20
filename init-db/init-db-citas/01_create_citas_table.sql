@@ -9,7 +9,5 @@ CREATE TABLE IF NOT EXISTS citas (
     fecha DATE NOT NULL,
     hora TIME NOT NULL,
     motivo VARCHAR(200) NOT NULL,
-    estado mis_estados NOT NULL
+    estado varchar(20) NOT NULL
 );
-
-ALTER TABLE citas ALTER COLUMN estado TYPE mis_estados USING estado::mis_estados;

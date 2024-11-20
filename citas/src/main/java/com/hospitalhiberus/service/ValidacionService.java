@@ -45,7 +45,8 @@ public class ValidacionService {
     }
 
     public Cita obtenerCitaPorId(String idCita) {
-        return repository.findById(idCita)
+        Integer idCitaInt = Integer.parseInt(idCita);
+        return repository.findById(idCitaInt)
                 .orElseThrow(() -> new RuntimeException("La cita con ID " + idCita + " no existe."));
     }
 }

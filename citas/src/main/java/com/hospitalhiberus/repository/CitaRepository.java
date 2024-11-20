@@ -6,9 +6,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface CitaRepository extends JpaRepository<Cita, String> {
+public interface CitaRepository extends JpaRepository<Cita, Integer> {
 
-    
+
     List<Cita> findCitaByIdPaciente(String idPaciente);
 
     List<Cita> findCitaByIdMedico(String idMedico);

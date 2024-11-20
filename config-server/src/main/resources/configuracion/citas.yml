@@ -8,7 +8,7 @@ spring:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
       properties:
-        schema.registry.url: http://schema-registry:8080
+        schema.registry.url: http://localhost:8080/
   datasource:
     url: jdbc:postgresql://localhost:5433/citas_db
     username: citas_user

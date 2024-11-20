@@ -18,7 +18,7 @@
 * Consultador de Facturas: http://localhost:8085/swagger-ui/index.html
 
 ## Diagrama 🎛️
-![Diagrama.png](imagenes%2FDiagrama.png)
+![Diagrama.png](imagenes%2FDiagrama.jpg)
 
 ## Pruebas
 * todos los test contienen test Unitarios con Mockito
