@@ -1,6 +1,6 @@
 package com.hospitalhiberus.service;
 
-import com.hospitalhiberus.avro.HistorialMedico;
+import com.hospitalhiberus.avro.HistorialMedicoValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
@@ -11,7 +11,7 @@ public class KafkaProducerService {
     @Autowired
     private KafkaTemplate<String, Object> kafkaTemplate;
 
-    public void enviarHistorialMedico(String topic, HistorialMedico historialMedico){
+    public void enviarHistorialMedico(String topic, HistorialMedicoValue historialMedico){
         kafkaTemplate.send(topic, historialMedico.getIdPaciente(), historialMedico);
         System.out.println("Historial médico enviado al topic " + topic + ": \n" + historialMedico);
     }

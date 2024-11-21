@@ -1,6 +1,6 @@
 package com.hospitalhiberus.service;
 
-import com.hospitalhiberus.avro.HistorialMedico;
+import com.hospitalhiberus.avro.HistorialMedicoValue;
 import com.hospitalhiberus.avro.Visita;
 import com.hospitalhiberus.model.Cita;
 import com.hospitalhiberus.model.ESTADOS;
@@ -64,20 +64,20 @@ public class CitaService {
 
         repository.save(cita);
 
-        // Crear mensaje Avro
-        HistorialMedico historialMedico = HistorialMedico.newBuilder()
-                .setIdHistorial(cita.getId().hashCode())
-                .setIdPaciente(cita.getIdPaciente())
-                .setFecha(String.valueOf(LocalDate.now()))
-                .setVisitas(List.of(
-                        Visita.newBuilder()
-                                .setFechaVisita(cita.getFecha().toString())
-                                .setHora(String.valueOf(cita.getHora()))
-                                .setTratamiento(tratamiento)
-                                .setMotivo("Consulta completada")
-                                .build()
-                ))
-                .build();
+        // Crear mensaje Avro Historial Medico
+        HistorialMedicoValue historialMedico = HistorialMedicoValue.newBuilder()
+            .setIdHistorial(cita.getId().hashCode())
+            .setIdPaciente(cita.getIdPaciente())
+            .setFecha(String.valueOf(LocalDate.now()))
+            .setVisitas(List.of(
+                Visita.newBuilder()
+                    .setFechaVisita(cita.getFecha().toString())
+                    .setHora(String.valueOf(cita.getHora()))
+                    .setTratamiento(tratamiento)
+                    .setMotivo(cita.getMotivo())
+                    .build()
+            ))
+            .build();
 
         // Enviar al topic
         try {

@@ -1,6 +1,6 @@
 package com.hospitalhiberus.service;
 
-import com.hospitalhiberus.avro.HistorialMedico;
+import com.hospitalhiberus.avro.HistorialMedicoValue;
 import com.hospitalhiberus.avro.Visita;
 import com.hospitalhiberus.mapper.Mapper;
 import com.hospitalhiberus.repository.HistorialMedicoRepository;
@@ -27,14 +27,14 @@ class HistorialMedicoConsumerTest {
     @InjectMocks
     private HistorialMedicoConsumer consumer;
 
-    private HistorialMedico historialAvro;
+    private HistorialMedicoValue historialAvro;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
 
         // Configuración de un objeto HistorialMedico de prueba (Avro)
-        historialAvro = HistorialMedico.newBuilder()
+        historialAvro = HistorialMedicoValue.newBuilder()
                 .setIdHistorial(1)
                 .setIdPaciente("paciente-1")
                 .setFecha("2024-11-20")

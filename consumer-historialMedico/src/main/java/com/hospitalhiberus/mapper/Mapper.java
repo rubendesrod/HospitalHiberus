@@ -11,16 +11,15 @@ import java.util.stream.Collectors;
 @Service
 public class Mapper {
 
-    public HistorialMedico mapperHistorial(com.hospitalhiberus.avro.HistorialMedico historialAvro, List<Visita> visitas){
+    public HistorialMedico mapperHistorial(com.hospitalhiberus.avro.HistorialMedicoValue historialAvro, List<Visita> visitas){
         HistorialMedico historial = new HistorialMedico();
-        historial.setIdHistorial(historialAvro.getIdHistorial());
         historial.setIdPaciente(historialAvro.getIdPaciente());
         historial.setFecha(historialAvro.getFecha());
         historial.setVisitas(visitas);
         return historial;
     }
 
-    public List<Visita> mapperVisitas(com.hospitalhiberus.avro.HistorialMedico historialAvro){
+    public List<Visita> mapperVisitas(com.hospitalhiberus.avro.HistorialMedicoValue historialAvro){
         return historialAvro.getVisitas().stream().map(visitaAvro -> {
             Visita v = new Visita();
             v.setFechaVisita(visitaAvro.getFechaVisita());

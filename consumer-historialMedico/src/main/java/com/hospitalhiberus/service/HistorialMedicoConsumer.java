@@ -1,9 +1,11 @@
 package com.hospitalhiberus.service;
 
-import com.hospitalhiberus.avro.HistorialMedico;
+import com.hospitalhiberus.avro.HistorialMedicoValue;
 import com.hospitalhiberus.mapper.Mapper;
+import com.hospitalhiberus.model.HistorialMedico;
 import com.hospitalhiberus.model.Visita;
 import com.hospitalhiberus.repository.HistorialMedicoRepository;
+import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
@@ -21,13 +23,15 @@ public class HistorialMedicoConsumer {
     private Mapper mapper;
 
     @KafkaListener(topics = "historialMedico", groupId = "historial-medico-consumer")
-    public void consume(HistorialMedico historialAvro) {
+    public void consume(ConsumerRecord<String,HistorialMedicoValue> historial) {
         try {
-            System.out.println("Se ha recibido el historial: " + historialAvro);
+            System.out.println("Key: " + historial.key());
+            System.out.println("Value: " + historial.value().getIdHistorial());
+            System.out.println("Fecha: " + historial.value().getFecha());
+            System.out.println("Visitas: " + historial.value().getVisitas());
 
-            // Buscar historial existente
-            com.hospitalhiberus.model.HistorialMedico historialExistente =
-                    repository.findByIdPaciente(historialAvro.getIdPaciente());
+            /*// Buscar historial existente
+            HistorialMedico historialExistente = repository.findByIdPaciente(historial.key());
 
             // Mapeado de las visitas
             List<Visita> visitasMapeadas = mapper.mapperVisitas(historialAvro);
@@ -36,7 +40,7 @@ public class HistorialMedicoConsumer {
                 actualizarHistorialExistente(historialExistente, visitasMapeadas);
             } else {
                 crearNuevoHistorial(historialAvro, visitasMapeadas);
-            }
+            }*/
         } catch (Exception e) {
             System.err.println("Error al procesar el historial médico: " + e.getMessage());
             e.printStackTrace();
@@ -44,8 +48,8 @@ public class HistorialMedicoConsumer {
     }
 
     private void actualizarHistorialExistente(
-            com.hospitalhiberus.model.HistorialMedico historialExistente,
-            List<Visita> visitasMapeadas) {
+        HistorialMedico historialExistente,
+        List<Visita> visitasMapeadas) {
 
         // Asegurarse de que la lista de visitas es mutable o no viene vacia
         if (historialExistente.getVisitas() == null) {
@@ -64,9 +68,9 @@ public class HistorialMedicoConsumer {
                 + historialExistente.getIdPaciente());
     }
 
-    private void crearNuevoHistorial(HistorialMedico historialAvro, List<Visita> visitasMapeadas) {
+    private void crearNuevoHistorial(HistorialMedicoValue historialAvro, List<Visita> visitasMapeadas) {
         // Crear un nuevo historial médico
-        com.hospitalhiberus.model.HistorialMedico nuevoHistorial = mapper.mapperHistorial(historialAvro, visitasMapeadas);
+        HistorialMedico nuevoHistorial = mapper.mapperHistorial(historialAvro, visitasMapeadas);
 
         // Guardar el nuevo historial en la base de datos
         repository.save(nuevoHistorial);
