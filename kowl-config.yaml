@@ -4,4 +4,4 @@ kafka:
   schemaRegistry:
     enabled: true
     urls:
-      - http://schema-registry:8080
+      - http://schema-registry:8081

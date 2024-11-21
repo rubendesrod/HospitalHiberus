@@ -7,10 +7,10 @@ spring:
     consumer:
       group-id: historial-medico-consumer
       auto-offset-reset: earliest
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
       properties:
-        schema.registry.url: http://schema-registry:8080
+        key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+        value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+        schema.registry.url: http://localhost:8081/
   data:
     mongodb:
       uri: mongodb://historialmedico_user:historialmedico_password@localhost:27017/historialmedico_db

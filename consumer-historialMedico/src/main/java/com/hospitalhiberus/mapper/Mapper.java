@@ -2,11 +2,13 @@ package com.hospitalhiberus.mapper;
 
 import com.hospitalhiberus.model.HistorialMedico;
 import com.hospitalhiberus.model.Visita;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class Mapper {
 
     public HistorialMedico mapperHistorial(com.hospitalhiberus.avro.HistorialMedico historialAvro, List<Visita> visitas){

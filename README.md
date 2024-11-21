@@ -7,18 +7,18 @@
 * Config server: http://localhost:8888/<nombre_servicio>/default
 * Eureka server: http://localhost:8761
 * Gateway server: http://localhost:9000/<servicio>
-* Kowl (Interfaz para Kafka): http://localhost:8087/topics
+* Kowl (Interfaz para Kafka): http://localhost:8080/topics
 * Zipkin (Monitorización): 
 
 #### URLs al swagger
-* Pacientes: http://localhost:8081/swagger-ui/index.html
+* Pacientes: http://localhost:8086/swagger-ui/index.html
 * Medicos: http://localhost:8082/docs
 * Citas: http://localhost:8083/swagger-ui/index.html
 * Consultador Histotrial Médico: http://localhost:8084/swagger-ui/index.html
 * Consultador de Facturas: http://localhost:8085/swagger-ui/index.html
 
 ## Diagrama 🎛️
-![Diagrama.png](imagenes%2FDiagrama.jpg)
+![Diagrama.jpg](imagenes%2FDiagrama.jpg)
 
 ## Pruebas
 * todos los test contienen test Unitarios con Mockito

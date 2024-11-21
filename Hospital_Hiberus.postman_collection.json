@@ -201,7 +201,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"dni\": \"12508523L\",\r\n  \"nombre\": \"Rubén\",\r\n  \"apellidos\": \"Descalzo Rodríguez\",\r\n  \"email\": \"rubendescalzoro@gmail.com\",\r\n  \"fechaNac\": \"2002-08-02\",\r\n  \"direccion\": \"c/ Barrio las cañas nº1, Bajo B\"\r\n}",
+							"raw": "{\r\n  \"dni\": \"12345678A\",\r\n  \"nombre\": \"Rubén\",\r\n  \"apellidos\": \"Descalzo Rodríguez\",\r\n  \"fechanac\": \"2002-08-02\",\r\n  \"email\": \"rubendescalzoro@gmail.com\",\r\n  \"direccion\": \"c/ Barrio las cañas nº1, Bajo B\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -229,7 +229,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"dni\": \"12508523L\",\r\n  \"nombre\": \"Rubén\",\r\n  \"apellidos\": \"Descalzo Rodríguez\",\r\n  \"email\": \"rubendescalzoro@gmail.com\",\r\n  \"fechaNac\": \"04-08-2002\",\r\n  \"direccion\": \"c/ Barrio las cañas nº1, Bajo B\"\r\n}",
+							"raw": "{\r\n  \"dni\": \"12508523L\",\r\n  \"nombre\": \"Rubén\",\r\n  \"apellidos\": \"Descalzo Rodríguez\",\r\n  \"email\": \"rubendescalzoro@gmail.com\",\r\n  \"fechanac\": \"04-08-2002\",\r\n  \"direccion\": \"c/ Barrio las cañas nº1, Bajo B\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -296,7 +296,205 @@
 		},
 		{
 			"name": "Citas",
-			"item": []
+			"item": [
+				{
+					"name": "Obtener todas las Citas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9000/citas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"citas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear una cita",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"idPaciente\": \"12345678A\",\r\n  \"idMedico\": \"12508523L\",\r\n  \"fecha\": \"2024-11-22\",\r\n  \"hora\": \"15:00:00\",\r\n  \"motivo\": \"El dolor de cabeza aumenta\",\r\n  \"estado\": \"programada\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/citas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"citas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener las citas de un Paciente",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9000/citas/paciente/:dni",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"citas",
+								"paciente",
+								":dni"
+							],
+							"variable": [
+								{
+									"key": "dni",
+									"value": "12345678A"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener las citas de un Medico",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9000/citas/medico/:dni",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"citas",
+								"medico",
+								":dni"
+							],
+							"variable": [
+								{
+									"key": "dni",
+									"value": "12508523L"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener las citas de un Medico / Estado",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9000/citas/medico/:dni/estado/:estado",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"citas",
+								"medico",
+								":dni",
+								"estado",
+								":estado"
+							],
+							"variable": [
+								{
+									"key": "dni",
+									"value": "12508523L"
+								},
+								{
+									"key": "estado",
+									"value": "programada"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Completar una cita",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\"tratamiento1\", \"tratamiento2\"]\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/citas/completar/:idCita",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"citas",
+								"completar",
+								":idCita"
+							],
+							"variable": [
+								{
+									"key": "idCita",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cancelar una cita",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9000/citas/cancelar/:idCita",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"citas",
+								"cancelar",
+								":idCita"
+							],
+							"variable": [
+								{
+									"key": "idCita",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "consultador-historialmedico",
