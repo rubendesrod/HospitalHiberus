@@ -5,13 +5,13 @@ spring:
   kafka:
     bootstrap-servers: localhost:9092
     consumer:
-      group-id: historial-medico-consumer
+      specific-avro-reader: true
+      group-id: ${spring.application.name}
       auto-offset-reset: earliest
       properties:
-        key.deserializer: org.apache.kafka.common.serialization.StringDeserializer
-        value.deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
-        schema.registry.url: http://localhost:8081/
-        specific.avro.reader: true
+        key.deserializer: io.confluent.kafka.streams.serdes.avro.SpecificAvroDeserializer
+        value.deserializer: io.confluent.kafka.streams.serdes.avro.SpecificAvroDeserializer
+        schema.registry.url: http://localhost:8081
   data:
     mongodb:
       uri: mongodb://historialmedico_user:historialmedico_password@localhost:27017/historialmedico_db

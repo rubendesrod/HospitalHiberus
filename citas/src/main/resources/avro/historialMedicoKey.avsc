@@ -1,0 +1,11 @@
+{
+  "type": "record",
+    "name": "HistorialMedicoKey",
+    "namespace": "com.hospitalhiberus.avro",
+  "fields": [
+    {
+      "name": "idPaciente",
+      "type": "string"
+    }
+  ]
+}

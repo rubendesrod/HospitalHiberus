@@ -3,7 +3,7 @@
   "name": "HistorialMedicoValue",
   "namespace": "com.hospitalhiberus.avro",
   "fields": [
-    {"name": "idHistorial", "type":  ["int", "null"]},
+    {"name": "idHistorial", "type": "int"},
     {"name": "idPaciente", "type": "string"},
     {"name": "fecha", "type": "string"},
     {

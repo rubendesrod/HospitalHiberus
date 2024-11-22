@@ -1,10 +1,12 @@
 package com.hospitalhiberus.service;
 
+import com.hospitalhiberus.avro.HistorialMedicoKey;
 import com.hospitalhiberus.avro.HistorialMedicoValue;
 import com.hospitalhiberus.mapper.Mapper;
 import com.hospitalhiberus.model.HistorialMedico;
 import com.hospitalhiberus.model.Visita;
 import com.hospitalhiberus.repository.HistorialMedicoRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Service
 public class HistorialMedicoConsumer {
 
@@ -23,15 +26,14 @@ public class HistorialMedicoConsumer {
     private Mapper mapper;
 
     @KafkaListener(topics = "historialMedico", groupId = "historial-medico-consumer")
-    public void consume(ConsumerRecord<String,HistorialMedicoValue> historial) {
+    public void consume(ConsumerRecord<HistorialMedicoKey,HistorialMedicoValue> historial) {
         try {
-            System.out.println("Key: " + historial.key());
-            System.out.println("Value: " + historial.value().getIdHistorial());
-            System.out.println("Fecha: " + historial.value().getFecha());
-            System.out.println("Visitas: " + historial.value().getVisitas());
+            log.info("Key: " + historial.key());
+            log.info("Value: " + historial.value());
+            log.info("Visitas: " + historial.value().getVisitas());
 
             /*// Buscar historial existente
-            HistorialMedico historialExistente = repository.findByIdPaciente(historial.key());
+            HistorialMedico historialExistente = repository.findByIdPaciente(historial.key().getIdPaciente());
 
             // Mapeado de las visitas
             List<Visita> visitasMapeadas = mapper.mapperVisitas(historialAvro);

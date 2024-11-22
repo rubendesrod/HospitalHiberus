@@ -6,8 +6,8 @@ spring:
     bootstrap-servers: localhost:9092
     producer:
       properties:
-        key-serializer: org.apache.kafka.common.serialization.StringSerializer
-        value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+        key.serializer: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerializer
+        value.serializer: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerializer
         schema.registry.url: http://localhost:8081/
   datasource:
     url: jdbc:postgresql://localhost:5433/citas_db
