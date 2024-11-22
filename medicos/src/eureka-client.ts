@@ -20,7 +20,7 @@ const eurekaClient = new Eureka({
     },
   },
   eureka: {
-    host: 'localhost',
+    host: 'host.docker.internal',
     port: 8761,
     servicePath: '/eureka/apps/',
   },

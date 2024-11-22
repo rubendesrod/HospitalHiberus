@@ -1,24 +1,30 @@
-# Usa la imagen de Node.js como base
-FROM node:18
+# Usar una imagen base oficial de Node.js
+FROM node:16-alpine
 
-# Establece el directorio de trabajo en el contenedor
+# Instalar Git (necesario para dependencias git en npm)
+RUN apk add --no-cache git
+
+# Establecer el directorio de trabajo en el contenedor
 WORKDIR /app
 
-# Copia los archivos de configuración a la imagen
+# Copiar el archivo de dependencias (package.json y package-lock.json)
 COPY package*.json ./
-COPY tsconfig.json ./
 
-# Instala las dependencias
+# Instalar las dependencias
 RUN npm install
 
-# Copia el resto del código fuente de la aplicación
+# Copiar el resto del código de la aplicación
 COPY . .
 
-# Compila el código TypeScript a JavaScript
+# Instalar las dependencias de TypeScript globalmente (para compilar)
+RUN npm install -g typescript
+
+# Compilar el código TypeScript a JavaScript
 RUN npm run build
 
-# Expone el puerto en el que corre la aplicación (ajusta si es necesario)
+# Exponer el puerto en el que corre la aplicación
 EXPOSE 8082
 
-# Comando para correr la aplicación
-CMD ["npm", "start"]
+# Comando para ejecutar la aplicación
+CMD ["node", "dist/index.js"]
+

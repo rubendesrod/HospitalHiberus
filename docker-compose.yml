@@ -175,6 +175,16 @@ services:
   # Gateway server
 
   # Microservicio Medicos
+  medicos-service:
+    build:
+      context: ./medicos
+      dockerfile: Dockerfile
+    container_name: medicos-service
+    ports:
+      - "8082:8082"
+    depends_on:
+      - db_medicos
+
 
   # Microservicio Pacientes
 

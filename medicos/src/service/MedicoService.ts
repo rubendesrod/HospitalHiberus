@@ -12,8 +12,8 @@ export class MedicoService {
   // Función para inicializar la conexion a la base de datos al instanciarla
   async inicializarConexion(): Promise<void> {
     this.conexion = await createConnection({
-      host: "localhost",
-      port: 3307,
+      host: "db_medicos",
+      port: 3306,
       user: "medicos_user",
       password: "medicos_password",
       database: "medicos_db",
