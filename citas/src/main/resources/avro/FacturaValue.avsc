@@ -1,0 +1,41 @@
+{
+  "type": "record",
+  "name": "FacturaValue",
+  "namespace": "com.hospitalhiberus.avro",
+  "fields": [
+    {
+      "name": "idFactura",
+      "type": "int"
+    },
+    {
+      "name": "idMedico",
+      "type": "string"
+    },
+    {
+      "name": "fechaEmision",
+      "type": {
+        "type": "string",
+        "logicalType": "date"
+      }
+    },
+    {
+      "name": "totalPagar",
+      "type": "int"
+    },
+    {
+      "name": "estado",
+      "type": {
+        "type": "enum",
+        "name": "ESTADOS",
+        "symbols": ["pendiente", "pagado"]
+      }
+    },
+    {
+      "name": "fechaPago",
+      "type": {
+        "type": "string",
+        "logicalType": "date"
+      }
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "type": "record",
+  "name": "FacturaKey",
+  "namespace": "com.hospitalhiberus.avro",
+  "fields": [
+    {
+      "name": "idMedico",
+      "type": "string"
+    }
+  ]
+}
