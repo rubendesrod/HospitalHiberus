@@ -25,6 +25,7 @@
     <module>consultador-historialMedico</module>
     <module>consultador-facturas</module>
     <module>consumer-historialMedico</module>
+      <module>consumer-factura</module>
   </modules>
 
   <properties>
@@ -58,12 +59,6 @@
   </dependencyManagement>
 
   <dependencies>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-test</artifactId>
-      <version>2.7.5</version>
-      <scope>test</scope>
-    </dependency>
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>

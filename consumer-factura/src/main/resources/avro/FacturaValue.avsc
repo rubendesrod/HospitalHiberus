@@ -1,29 +1,30 @@
-
-/*
- * Comment for license information.
- */
-// The default namespace for all named schemata in the file. Defaults to the null namespace if omitted.
-namespace FacturaValue;
-
-// The main schema (optional); any field type is valid. If specified, the file is equivalent to a .avsc file.
-schema array<Message>;
-
-/* Below here you can define named types (record, enum, fixed) and imports, in any order. */
-
-/**
- * Simple message.
- */
-record Message {
-	/**
-	 * Optional message title.
-	 */
-	string? title = null;
-	/**
-	 * The message.
-	 */
-	string message;
-	/**
-	 * When the message was created.
-	 */
-	timestamp_ms dateTime;
+{
+  "type": "record",
+  "name": "FacturaValue",
+  "namespace": "com.hospitalhiberus.avro",
+  "fields": [
+    {
+      "name": "idMedico",
+      "type": "string"
+    },
+    {
+      "name": "fechaEmision",
+      "type": {
+        "type": "string",
+        "logicalType": "date"
+      }
+    },
+    {
+      "name": "totalPagar",
+      "type": "int"
+    },
+    {
+      "name": "estado",
+      "type": {
+        "type": "enum",
+        "name": "ESTADOS",
+        "symbols": ["pendiente", "pagado"]
+      }
+    }
+  ]
 }

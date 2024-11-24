@@ -1,5 +1,6 @@
 package com.hospitalhiberus.service;
 
+import com.hospitalhiberus.avro.FacturaValue;
 import com.hospitalhiberus.avro.HistorialMedicoValue;
 import com.hospitalhiberus.avro.Visita;
 import com.hospitalhiberus.model.Cita;
@@ -64,7 +65,7 @@ public class CitaService {
 
         repository.save(cita);
 
-        // Crear mensaje Avro Historial Medico
+        // Builder de Avro Historial Medico
         HistorialMedicoValue historialMedico = HistorialMedicoValue.newBuilder()
             .setIdHistorial(cita.getId().hashCode())
             .setIdPaciente(cita.getIdPaciente())
@@ -79,9 +80,18 @@ public class CitaService {
             ))
             .build();
 
-        // Enviar al topic
+        // Builder del Avro Factura
+        FacturaValue factura = FacturaValue.newBuilder()
+                .setIdMedico(cita.getIdMedico())
+                .setEstado(com.hospitalhiberus.avro.ESTADOS.pendiente)
+                .setFechaEmision(String.valueOf(LocalDate.now()))
+                .setTotalPagar(400)
+                .build();
+
+        // Enviar al topic el historial Medico y la factura
         try {
             kafkaService.enviarHistorialMedico("historialMedico", historialMedico);
+            kafkaService.enviarFactura("facturas", factura);
         } catch (KafkaException e) {
             System.out.println("No se ha podido enviar el historial al topic historialMedico");
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al procesar el historial médico");

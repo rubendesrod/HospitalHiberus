@@ -53,7 +53,7 @@ public class HistorialMedicoConsumer {
         HistorialMedico historialExistente,
         List<Visita> visitasMapeadas) {
 
-        // Asegurarse de que la lista de visitas es mutable o no viene vacia
+        // Asegurarse de que la lista de visitas es mutable o no está vacia
         if (historialExistente.getVisitas() == null) {
             historialExistente.setVisitas(new ArrayList<>());
         } else if (!(historialExistente.getVisitas() instanceof ArrayList)) {
