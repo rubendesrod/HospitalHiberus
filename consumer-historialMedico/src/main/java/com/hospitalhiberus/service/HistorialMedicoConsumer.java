@@ -25,15 +25,15 @@ public class HistorialMedicoConsumer {
     @Autowired
     private Mapper mapper;
 
-    @KafkaListener(topics = "historialMedico", groupId = "historial-medico-consumer")
-    public void consume(ConsumerRecord<HistorialMedicoKey,HistorialMedicoValue> historial) {
+    @KafkaListener(topics = "historialMedico")
+    public void consume(ConsumerRecord<HistorialMedicoKey,HistorialMedicoValue> record) {
         try {
-            log.info("Key: " + historial.key());
-            log.info("Value: " + historial.value());
-            log.info("Visitas: " + historial.value().getVisitas());
+            log.info("Key: " + record.key());
+            log.info("Value: " + record.value());
+            HistorialMedicoValue historialAvro = record.value();
 
-            /*// Buscar historial existente
-            HistorialMedico historialExistente = repository.findByIdPaciente(historial.key().getIdPaciente());
+            // Buscar historial existente
+            HistorialMedico historialExistente = repository.findByIdPaciente(record.key().getIdPaciente());
 
             // Mapeado de las visitas
             List<Visita> visitasMapeadas = mapper.mapperVisitas(historialAvro);
@@ -42,7 +42,7 @@ public class HistorialMedicoConsumer {
                 actualizarHistorialExistente(historialExistente, visitasMapeadas);
             } else {
                 crearNuevoHistorial(historialAvro, visitasMapeadas);
-            }*/
+            }
         } catch (Exception e) {
             System.err.println("Error al procesar el historial médico: " + e.getMessage());
             e.printStackTrace();

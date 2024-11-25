@@ -84,7 +84,7 @@ services:
     restart: on-failure
     hostname: kowl
     volumes:
-      - ./kowl-config.yaml:/etc/kowl/config.yaml
+      - ./inits/kowl-config.yaml:/etc/kowl/config.yaml
     ports:
       - "8080:8080"
     environment:
@@ -151,7 +151,7 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: historialMedico_rootpassword
     volumes:
       - historialMedico_data:/data/db
-      - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js
+      - ./inits/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js
 
   # MySQL para el microservicio facturas
   db_facturas:
@@ -180,6 +180,12 @@ services:
       context: ./medicos
       dockerfile: Dockerfile
     container_name: medicos-service
+    environment:
+      DB_HOST: db_medicos
+      DB_PORT: 3306
+      DB_USER: medicos_user
+      DB_PASSWORD: medicos_password
+      DB_NAME: medicos_db
     ports:
       - "8082:8082"
     depends_on:

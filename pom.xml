@@ -24,8 +24,8 @@
     <module>citas</module>
     <module>consultador-historialMedico</module>
     <module>consultador-facturas</module>
+    <module>consumer-factura</module>
     <module>consumer-historialMedico</module>
-      <module>consumer-factura</module>
   </modules>
 
   <properties>
@@ -62,7 +62,7 @@
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
-      <version>1.18.24</version>
+      <version>1.18.30</version>
       <optional>true</optional>
     </dependency>
   </dependencies>
