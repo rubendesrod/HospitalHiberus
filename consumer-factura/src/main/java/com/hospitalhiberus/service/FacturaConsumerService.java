@@ -7,6 +7,7 @@ import com.hospitalhiberus.model.Factura;
 import com.hospitalhiberus.repository.FacturaRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,7 @@ import java.time.LocalDate;
 @Service
 public class FacturaConsumerService {
 
+    @Autowired
     private FacturaRepository repository;
 
     @KafkaListener(topics = "facturas")
@@ -29,7 +31,7 @@ public class FacturaConsumerService {
         repository.save(f);
         log.info("La factura ha sido guardada en la DB correctamente");
         }catch (Exception e){
-            log.error("No se ha podido guardar la nueva factura, " + record.value());
+            log.error( e + "\nNo se ha podido guardar la nueva factura, " + record.value());
         }
     }
 

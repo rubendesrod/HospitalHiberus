@@ -44,7 +44,7 @@ public class HistorialMedicoConsumer {
                 crearNuevoHistorial(historialAvro, visitasMapeadas);
             }
         } catch (Exception e) {
-            System.err.println("Error al procesar el historial médico: " + e.getMessage());
+            log.error("Error al procesar el historial médico: " + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -66,7 +66,7 @@ public class HistorialMedicoConsumer {
         // Guardar el historial actualizado
         repository.save(historialExistente);
 
-        System.out.println("Visitas añadidas al historial existente para el paciente: "
+        log.info("Visitas añadidas al historial existente para el paciente: "
                 + historialExistente.getIdPaciente());
     }
 
@@ -77,6 +77,6 @@ public class HistorialMedicoConsumer {
         // Guardar el nuevo historial en la base de datos
         repository.save(nuevoHistorial);
 
-        System.out.println("Nuevo historial médico creado para el paciente: " + nuevoHistorial.getIdPaciente());
+        log.info("Nuevo historial médico creado para el paciente: " + nuevoHistorial.getIdPaciente());
     }
 }
