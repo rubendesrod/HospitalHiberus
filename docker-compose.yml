@@ -1,6 +1,13 @@
 version: "3.8"
 services:
 
+  #Zipkin
+  zipkin:
+    image: openzipkin/zipkin:2.24
+    container_name: zipkin
+    ports:
+      - "9411:9411"
+
   # Zokeeper
   zookeeper:
     image: library/zookeeper:3.7.0

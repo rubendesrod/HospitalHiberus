@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hospitalhiberus.controller.HistorialMedicoController;
 import com.hospitalhiberus.model.HistorialMedico;
 import com.hospitalhiberus.service.HistorialMedicoService;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -18,7 +19,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(HistorialMedicoController.class)
-class HistorialMedicoControllerTest {
+class ApplicationConsultadorHistorialMedicoTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -30,6 +31,7 @@ class HistorialMedicoControllerTest {
     private ObjectMapper objectMapper;
 
     @Test
+    @DisplayName("Test 01 - Obtener todos los historiales Medicos")
     void testObtenerTodos() throws Exception {
         HistorialMedico historialMedico = new HistorialMedico();
         historialMedico.setIdHistorial(1);
@@ -47,6 +49,7 @@ class HistorialMedicoControllerTest {
     }
 
     @Test
+    @DisplayName("Test 02 - Obtener el historial medico por el DNI de paciente")
     void testObtenerPorId() throws Exception {
         HistorialMedico historialMedico = new HistorialMedico();
         historialMedico.setId("12345");

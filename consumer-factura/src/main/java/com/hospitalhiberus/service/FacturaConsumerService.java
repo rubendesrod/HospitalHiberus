@@ -38,7 +38,7 @@ public class FacturaConsumerService {
     }
 
 
-    private Factura mapearFactura(FacturaValue avro){
+    Factura mapearFactura(FacturaValue avro){
       Factura factura = new Factura();
       factura.setTotalPagar(avro.getTotalPagar());
       factura.setFechaEmision(LocalDate.parse(avro.getFechaEmision()));

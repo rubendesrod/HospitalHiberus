@@ -4,10 +4,13 @@ import com.hospitalhiberus.controller.PacienteController;
 import com.hospitalhiberus.model.Paciente;
 import com.hospitalhiberus.repository.PacienteRepository;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -17,7 +20,8 @@ import java.util.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
-
+// Con esta extension no tengo que crear un @BeforeEach
+@ExtendWith(MockitoExtension.class)
 public class PacienteControllerTest {
 
     @Mock
@@ -26,12 +30,8 @@ public class PacienteControllerTest {
     @InjectMocks
     private PacienteController pacienteController;
 
-    @BeforeEach
-    void setUp(){
-        MockitoAnnotations.openMocks(this);
-    }
-
     @Test
+    @DisplayName("Test para obtener todos los pacientes")
     public void testGetAllPacientes(){
 
         // Seteo la fecha del paciente
@@ -53,6 +53,7 @@ public class PacienteControllerTest {
     }
 
     @Test
+    @DisplayName("Test para obtener un paciente")
     public void testGetPaciente(){
         // Seteo la fecha del paciente
         LocalDate fechanac = LocalDate.of(2002, 8, 4);
@@ -75,6 +76,7 @@ public class PacienteControllerTest {
     }
 
     @Test
+    @DisplayName("Test para crear un paciente")
     public void testCreatePaciente(){
 
         // Creo un paciente
@@ -93,6 +95,7 @@ public class PacienteControllerTest {
     }
 
     @Test
+    @DisplayName("Test para actualizar un paciente")
     public void testUpdatePaciente() {
 
         // Creo un paciente existente
@@ -122,6 +125,7 @@ public class PacienteControllerTest {
     }
 
     @Test
+    @DisplayName("Test para borrar un paciente")
     public void testDeletePaciente() {
         // Simulo que el paciente existe en el repositorio
         when(pacienteRepository.existsByDni("12543674T")).thenReturn(true);
