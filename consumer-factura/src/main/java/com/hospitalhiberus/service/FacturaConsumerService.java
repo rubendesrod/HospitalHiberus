@@ -1,11 +1,13 @@
 package com.hospitalhiberus.service;
 
 import com.hospitalhiberus.avro.FacturaKey;
+import com.hospitalhiberus.avro.FacturaKeyValue;
 import com.hospitalhiberus.avro.FacturaValue;
 import com.hospitalhiberus.model.ESTADOS;
 import com.hospitalhiberus.model.Factura;
 import com.hospitalhiberus.repository.FacturaRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.kafka.clients.consumer.Consumer;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -34,6 +36,19 @@ public class FacturaConsumerService {
             log.error( e + "\nNo se ha podido guardar la nueva factura, " + record.value());
         }
     }
+
+    @KafkaListener(topics = "facturasPagadas")
+    public void consumeFacturasPagadas(ConsumerRecord<FacturaKeyValue, FacturaKeyValue> record) {
+        try {
+            log.info("Key: " + record.key());
+            log.info("Value: " + record.value());
+
+            // TODO Lógica para procesar la factura
+        } catch (Exception e) {
+            log.error("Error procesando el mensaje del tópico 'facturasPagadas'", e);
+        }
+    }
+
 
     private Factura mapearFactura(FacturaValue avro){
       Factura factura = new Factura();

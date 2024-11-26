@@ -1,0 +1,7 @@
+{
+  "type": "record",
+  "name": "FacturaKeyValue",
+  "fields": [
+    {"name": "idFactura", "type": "int"}
+  ]
+}

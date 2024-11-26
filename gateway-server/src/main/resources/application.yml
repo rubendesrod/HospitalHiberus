@@ -24,7 +24,7 @@ spring:
           predicates:
             - Path=/historiales/**
         - id: micro-consultador-facturas
-          uri: lb://consultador-facturas
+          uri: lb://consultador-factura
           predicates:
             - Path=/facturas/**
     discovery:
