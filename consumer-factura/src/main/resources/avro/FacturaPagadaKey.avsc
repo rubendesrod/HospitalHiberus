@@ -1,6 +1,6 @@
 {
   "type": "record",
-  "name": "FacturaKeyValue",
+  "name": "FacturaPagadaKey",
   "namespace": "com.hospitalhiberus.avro",
   "fields": [
     {"name": "idFactura", "type": "int"}

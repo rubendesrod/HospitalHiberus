@@ -1,7 +1,6 @@
 package com.hospitalhiberus.service;
 
 import com.hospitalhiberus.avro.FacturaKey;
-import com.hospitalhiberus.avro.FacturaKeyValue;
 import com.hospitalhiberus.avro.FacturaValue;
 import com.hospitalhiberus.model.ESTADOS;
 import com.hospitalhiberus.model.Factura;
@@ -25,6 +24,7 @@ public class FacturaConsumerService {
     @KafkaListener(topics = "facturas")
     public void consume(ConsumerRecord<FacturaKey, FacturaValue> record) {
 
+        log.info("Topic: facturas");
         log.info("Key: " + record.key());
         log.info("Valor: " + record.value());
 
@@ -34,18 +34,6 @@ public class FacturaConsumerService {
         log.info("La factura ha sido guardada en la DB correctamente");
         }catch (Exception e){
             log.error( e + "\nNo se ha podido guardar la nueva factura, " + record.value());
-        }
-    }
-
-    @KafkaListener(topics = "facturasPagadas")
-    public void consumeFacturasPagadas(ConsumerRecord<FacturaKeyValue, FacturaKeyValue> record) {
-        try {
-            log.info("Key: " + record.key());
-            log.info("Value: " + record.value());
-
-            // TODO Lógica para procesar la factura
-        } catch (Exception e) {
-            log.error("Error procesando el mensaje del tópico 'facturasPagadas'", e);
         }
     }
 

@@ -1,0 +1,8 @@
+{
+  "type": "record",
+  "name": "FacturaPagadaValue",
+  "namespace": "com.hospitalhiberus.avro",
+  "fields": [
+    {"name": "idFactura", "type": "int"}
+  ]
+}
