@@ -39,10 +39,8 @@ public class FacturaConsumerServiceTest {
         value.setIdMedico("MED123");
         ConsumerRecord<FacturaKey, FacturaValue> record = new ConsumerRecord<>("facturas", 0, 0, key, value);
 
-        // Act
         consumerService.consume(record);
 
-        // Assert
         verify(repository, times(1)).save(any(Factura.class));
     }
 
