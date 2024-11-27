@@ -15,7 +15,7 @@
 * [Kowl (Interfaz para Kafka)](http://localhost:8080/topics)
 * [Zipkin (Monitorización de Trazas)](http://localhost:9411/zipkin/)
 
-#### URLs al swagger
+#### URLs al swagger ⛓️‍💥
 * [Swagger Pacientes](http://localhost:8086/swagger-ui/index.html)
 * [Swagger Medicos](http://localhost:8082/docs)
 * [Swagger Citas](http://localhost:8083/swagger-ui/index.html)
@@ -36,8 +36,17 @@
     # Ejecutar los test realizados con Jest
     npm test
     ``` 
+* Para ejecutar los test de Pyhton [tener tener Kafka, Zookeper y Schema-registry levantado en docker]
+    [Fichero de requerimientos](./pago-factura/requerido.txt)
+  ```bash
+    # Dependencia para el test
+    pip install testcontainers
+    #[Para ejecutar el test]
+    python -m unittest kafka_producer_consumer_test.py
+    ``` 
 * Las pruebas E2E se han hecho manualmente con postman
   * [Fichero para importar en Postman](Hospital_Hiberus.postman_collection.json)
+  * 
 
 ## Descripción
 ##### API realizada como trabajo en la Hiberus University, cuenta con diferentes tecnologías y lenguajes, encargada de realizar:
@@ -52,16 +61,16 @@
 
 ## Tecnologias
 ### comunicación y despliegue
-* Spring cloud [Config Server, Gateway, Eureka]
-* Kafka
-* Zipkin
-* Docker
-* github
+* Spring cloud [ Config Server, Gateway, Eureka ]
+* Kafka [ Zookeper, Schema-Registry, Kowl ]
+* Zipkin [ Monitorización en la trazas de los servicios ]
+* Docker [ Docker-compose, Dockerfile ]
+* github [ control de versiones ]
 
 ### Sistemas gestores de Bases de datos
-* MongoDB
-* PostgreSQL
-* MySQL
+* MongoDB [ Historial Medico ]
+* PostgreSQL [ Citas, Pacientes ]
+* MySQL [ Facturas, Medicos ]
 
 ### Lenguajes
 * Java [Spring Boot]

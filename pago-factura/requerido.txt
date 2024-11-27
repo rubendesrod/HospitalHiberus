@@ -1,0 +1,8 @@
+# Dependencia de KafkaAVro
+pip install confluent-kafka[avro]
+# Dependencia para hacer perticiones web
+pip install urllib3
+# Dependencia para el test
+pip install testcontainers
+[Para ejecutar el test]
+python -m unittest kafka_producer_consumer_test.py
