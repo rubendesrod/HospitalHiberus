@@ -25,7 +25,6 @@ yarn-error.log*
 
 # Docker
 **/docker-compose.override.yml
-*.env
 
 # Archivos temporales
 *.tmp
