@@ -1,6 +1,5 @@
 package com.hospitalhiberus;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hospitalhiberus.controller.HistorialMedicoController;
 import com.hospitalhiberus.model.HistorialMedico;
 import com.hospitalhiberus.service.HistorialMedicoService;
@@ -26,9 +25,6 @@ class ApplicationConsultadorHistorialMedicoTest {
 
     @MockBean
     private HistorialMedicoService service;
-
-    @Autowired
-    private ObjectMapper objectMapper;
 
     @Test
     @DisplayName("Test 01 - Obtener todos los historiales Medicos")

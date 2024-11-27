@@ -16,11 +16,12 @@ import org.springframework.http.ResponseEntity;
 import java.util.Map;
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class ValidacionServiceTest {
+class ValidacionServiceTest {
 
     @Mock
     private MedicoClient medicoClient;
@@ -83,11 +84,13 @@ public class ValidacionServiceTest {
     void testObtenerCitaPorIdExitoso() {
         String idCita = "1";
         Cita cita = new Cita();
+
         when(citaRepository.findById(Integer.parseInt(idCita))).thenReturn(Optional.of(cita));
 
         Cita result = validacionService.obtenerCitaPorId(idCita);
 
         verify(citaRepository, times(1)).findById(Integer.parseInt(idCita));
+        assertEquals(cita, result);
     }
 
     @Test

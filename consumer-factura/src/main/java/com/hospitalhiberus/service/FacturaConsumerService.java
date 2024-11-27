@@ -6,7 +6,6 @@ import com.hospitalhiberus.model.ESTADOS;
 import com.hospitalhiberus.model.Factura;
 import com.hospitalhiberus.repository.FacturaRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.kafka.clients.consumer.Consumer;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -45,6 +44,6 @@ public class FacturaConsumerService {
       factura.setIdMedico(avro.getIdMedico());
       factura.setEstado(ESTADOS.pendiente);
       return factura;
-    };
+    }
 
 }

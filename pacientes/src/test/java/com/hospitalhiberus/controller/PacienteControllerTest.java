@@ -1,15 +1,12 @@
 package com.hospitalhiberus.controller;
 
-import com.hospitalhiberus.controller.PacienteController;
 import com.hospitalhiberus.model.Paciente;
 import com.hospitalhiberus.repository.PacienteRepository;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +19,7 @@ import static org.mockito.Mockito.*;
 
 // Con esta extension no tengo que crear un @BeforeEach
 @ExtendWith(MockitoExtension.class)
-public class PacienteControllerTest {
+class PacienteControllerTest {
 
     @Mock
     private PacienteRepository pacienteRepository;
@@ -32,7 +29,7 @@ public class PacienteControllerTest {
 
     @Test
     @DisplayName("Test para obtener todos los pacientes")
-    public void testGetAllPacientes(){
+    void testGetAllPacientes(){
 
         // Seteo la fecha del paciente
         LocalDate fechaNac = LocalDate.of(2002, 8, 4);
@@ -54,7 +51,7 @@ public class PacienteControllerTest {
 
     @Test
     @DisplayName("Test para obtener un paciente")
-    public void testGetPaciente(){
+    void testGetPaciente(){
         // Seteo la fecha del paciente
         LocalDate fechanac = LocalDate.of(2002, 8, 4);
         Paciente paciente1 = new Paciente("12543674T", "Ruben", "Descalzo Rodriguez", fechanac, "rubendes@hiberus.com", "C/ Maldonado 34, 5 Izq");
@@ -77,7 +74,7 @@ public class PacienteControllerTest {
 
     @Test
     @DisplayName("Test para crear un paciente")
-    public void testCreatePaciente(){
+    void testCreatePaciente(){
 
         // Creo un paciente
         LocalDate fechaNac = LocalDate.of(2002, 8, 4);
@@ -96,7 +93,7 @@ public class PacienteControllerTest {
 
     @Test
     @DisplayName("Test para actualizar un paciente")
-    public void testUpdatePaciente() {
+    void testUpdatePaciente() {
 
         // Creo un paciente existente
         LocalDate fechaNac = LocalDate.of(2002, 8, 4);
@@ -126,7 +123,7 @@ public class PacienteControllerTest {
 
     @Test
     @DisplayName("Test para borrar un paciente")
-    public void testDeletePaciente() {
+    void testDeletePaciente() {
         // Simulo que el paciente existe en el repositorio
         when(pacienteRepository.existsByDni("12543674T")).thenReturn(true);
 

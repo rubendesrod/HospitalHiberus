@@ -5,7 +5,6 @@ import com.hospitalhiberus.avro.FacturaPagadaValue;
 import com.hospitalhiberus.model.ESTADOS;
 import com.hospitalhiberus.model.Factura;
 import com.hospitalhiberus.repository.FacturaRepository;
-import com.hospitalhiberus.service.FacturaPagadaConsumerService;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,7 +13,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.time.LocalDate;
 import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -22,7 +20,7 @@ import static org.mockito.Mockito.*;
 
 // Con esta extension no tengo que crear un @BeforeEach
 @ExtendWith(MockitoExtension.class)
-public class FacturaPagadaConsumerServiceTest {
+class FacturaPagadaConsumerServiceTest {
 
     @Mock
     private FacturaRepository repository;

@@ -2,16 +2,18 @@ package com.hospitalhiberus.controller;
 
 import com.hospitalhiberus.model.Paciente;
 import com.hospitalhiberus.repository.PacienteRepository;
+
+import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
-import javax.validation.Valid;
 import java.util.List;
 
+@Slf4j
 @RestController
 // Se puede añadir un @RequestMapping("/pacientes"),pero quiero seguis la estructura de la API Medicos
 public class PacienteController {
@@ -26,7 +28,7 @@ public class PacienteController {
 
     @PostMapping("/pacientes")
     public ResponseEntity<Paciente> crearPaciente(@RequestBody Paciente paciente){
-        System.out.println("Datos recibidos: " + paciente);
+        log.info("Datos recibidos: " + paciente);
         if (pacienteRepository.existsByDni(paciente.getDni())) {
             return new ResponseEntity<>(HttpStatus.CONFLICT); // Si el DNI ya existe
         }
