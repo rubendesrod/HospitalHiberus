@@ -3,7 +3,7 @@ server:
 
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3308/facturas_db?allowPublicKeyRetrieval=true&useSSL=false
+    url: jdbc:mysql://${DB_FACTURAS:localhost:3308}/facturas_db?allowPublicKeyRetrieval=true&useSSL=false
     username: facturas_user
     password: facturas_password
     driver-class-name: com.mysql.cj.jdbc.Driver

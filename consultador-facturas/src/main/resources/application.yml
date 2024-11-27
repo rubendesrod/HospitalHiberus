@@ -3,12 +3,12 @@ spring:
     name: consultador-factura
   cloud:
     config:
-      uri: http://localhost:8888
+      uri: http://${HOST_CONFIG_SERVER:localhost}:8888
 
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka
+      defaultZone: http://${HOST_EUREKA_SERVER:localhost}:8761/eureka
     register-with-eureka: true
     fetch-registry: true
 

@@ -60,13 +60,4 @@
     </dependency>
   </dependencies>
 
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-maven-plugin</artifactId>
-        <!-- La versión debe ser gestionada por el padre -->
-      </plugin>
-    </plugins>
-  </build>
 </project>

@@ -3,14 +3,14 @@ server:
 
 spring:
   kafka:
-    bootstrap-servers: localhost:9092
+    bootstrap-servers: ${HOST_KAFKA:localhost}:9092
     producer:
       properties:
         key.serializer: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerializer
         value.serializer: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerializer
-        schema.registry.url: http://localhost:8081/
+        schema.registry.url: http://${HOST_SCHEMA_REGISTRY:localhost}:8081
   datasource:
-    url: jdbc:postgresql://localhost:5433/citas_db
+    url: jdbc:postgresql://${DB_CITAS:localhost:5433}/citas_db
     username: citas_user
     password: citas_password
     driver-class-name: org.postgresql.Driver

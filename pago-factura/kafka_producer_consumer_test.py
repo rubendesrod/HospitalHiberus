@@ -3,7 +3,7 @@ from confluent_kafka.schema_registry import SchemaRegistryClient
 from confluent_kafka.schema_registry.avro import AvroDeserializer
 import unittest
 
-# Importar las funciones de tu código para poder utilizarlas en el test
+# Importo las funciones de mi productor
 from producer_factura import enviar_id_factura, load_schema
 
 class KafkaProducerConsumerDockerTest(unittest.TestCase):
@@ -13,13 +13,6 @@ class KafkaProducerConsumerDockerTest(unittest.TestCase):
         self.bootstrap_servers = 'localhost:9092'
         self.schema_registry_url = 'http://localhost:8081'
         self.topic = 'facturasPagadas'
-
-    def load_schema(file_path):
-        try:
-            with open(file_path, 'r') as schema_file:
-                return schema_file.read()
-        except Exception as e:
-            raise Exception(f"Error al cargar el esquema: {e}")
 
     def test_produce_and_consume_message_avro(self):
 
@@ -55,7 +48,7 @@ class KafkaProducerConsumerDockerTest(unittest.TestCase):
             if msg.error():
                 raise KafkaException(msg.error())
                 
-            # Assert: Verificar el contenido del mensaje leído
+            # Verificar el contenido del mensaje leído
             key = msg.key()
             value = msg.value()
 

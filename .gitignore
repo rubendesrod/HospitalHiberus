@@ -5,10 +5,8 @@
 *.ear
 
 .vscode
-# Directorios de compilación de Maven
 **/target/
-
-# Configuración de IntelliJ IDEA
+__pycache__
 .idea/
 *.iml
 *.iws
@@ -28,10 +26,6 @@ yarn-error.log*
 # Docker
 **/docker-compose.override.yml
 *.env
-
-# Archivos de configuración local
-.env
-*.env.local
 
 # Archivos temporales
 *.tmp

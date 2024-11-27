@@ -46,7 +46,6 @@
     ``` 
 * Las pruebas E2E se han hecho manualmente con postman
   * [Fichero para importar en Postman](Hospital_Hiberus.postman_collection.json)
-  * 
 
 ## Descripción
 ##### API realizada como trabajo en la Hiberus University, cuenta con diferentes tecnologías y lenguajes, encargada de realizar:
