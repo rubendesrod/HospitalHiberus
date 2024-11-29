@@ -202,8 +202,10 @@ services:
     restart: always
     ports:
       - "9000:9000"
-    env_file:
-      - .env
+    environment:
+      EUREKA_HOST: eureka-server
+    depends_on:
+      - eureka-server
 
   # Microservicio Medicos
   medicos-service:

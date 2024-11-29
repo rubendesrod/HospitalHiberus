@@ -12,7 +12,6 @@ public class HistorialMedico {
 
     @Id
     private String id; // Mongo genera un id automaticamente
-    private Integer idHistorial; // ID del historial
     private String idPaciente; // DNI del paciente que pertenece a un historial Medico
     private String fecha; // Fecha en la que se genera el historial medico (primera vez que se tiene un cita)
     private List<Visita> visitas; // lista de visitas de un paciente

@@ -4,52 +4,80 @@ import com.hospitalhiberus.model.Cita;
 import com.hospitalhiberus.model.ESTADOS;
 import com.hospitalhiberus.service.CitaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/citas")
 public class CitaController {
 
     @Autowired
     private CitaService service;
 
-    @GetMapping("/citas")
+    @GetMapping
     public ResponseEntity<List<Cita>> obtenerTodasLasCitas() {
-        return service.obtenerTodasLasCitas();
+        List<Cita> citas = service.obtenerTodasLasCitas();
+        if (citas.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(citas);
     }
 
-    @GetMapping("/citas/paciente/{idPaciente}")
+    @GetMapping("/paciente/{idPaciente}")
     public ResponseEntity<List<Cita>> obtenerCitasPorIdPaciente(@PathVariable("idPaciente") String idPaciente) {
-        return service.obtenerCitasPorIdPaciente(idPaciente);
+        List<Cita> citas = service.obtenerCitasPorIdPaciente(idPaciente);
+        if (citas.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(citas);
     }
 
-    @GetMapping("/citas/medico/{idMedico}")
+    @GetMapping("/medico/{idMedico}")
     public ResponseEntity<List<Cita>> obtenerCitasPorIdMedico(@PathVariable("idMedico") String idMedico) {
-        return service.obtenerCitasPorIdMedico(idMedico);
+        List<Cita> citas = service.obtenerCitasPorIdMedico(idMedico);
+        if (citas.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(citas);
     }
 
-    @GetMapping("/citas/medico/{idMedico}/estado/{estado}")
+    @GetMapping("/medico/{idMedico}/estado/{estado}")
     public ResponseEntity<List<Cita>> obtenerCitasPorIdMedicoYEstado(
             @PathVariable("idMedico") String idMedico,
             @PathVariable("estado") ESTADOS estado
     ) {
-        return service.obtenerCitasPorIdMedicoYEstado(idMedico, estado);
+        List<Cita> citas = service.obtenerCitasPorIdMedicoYEstado(idMedico, estado);
+        if (citas.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(citas);
     }
 
-    @PostMapping("/citas")
+    @PostMapping
     public ResponseEntity<Cita> crearCita(@RequestBody Cita cita) {
-        return service.crearCita(cita);
+        Cita nuevaCita = service.crearCita(cita);
+        return ResponseEntity.status(HttpStatus.CREATED).body(nuevaCita);
     }
 
-    @PutMapping("/citas/completar/{idCita}")
+    @PutMapping("/completar/{idCita}")
     public ResponseEntity<Cita> completarCita(@PathVariable("idCita") String idCita, @RequestBody List<String> tratamiento) {
-        return service.completarCita(idCita, tratamiento);
+        try {
+            Cita citaActualizada = service.completarCita(idCita, tratamiento);
+            return ResponseEntity.ok(citaActualizada);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(null);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
-    @PutMapping("/citas/cancelar/{idCita}")
+    @PutMapping("/cancelar/{idCita}")
     public ResponseEntity<Cita> cancelarCita(@PathVariable("idCita") String idCita) {
-        return service.cancelarCita(idCita);
+        Cita citaCancelada = service.cancelarCita(idCita);
+        return ResponseEntity.ok(citaCancelada);
     }
 }
+

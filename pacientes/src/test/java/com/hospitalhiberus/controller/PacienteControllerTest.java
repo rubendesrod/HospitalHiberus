@@ -1,7 +1,8 @@
 package com.hospitalhiberus.controller;
 
 import com.hospitalhiberus.model.Paciente;
-import com.hospitalhiberus.repository.PacienteRepository;
+import com.hospitalhiberus.service.PacienteService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,108 +13,94 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
-// Con esta extension no tengo que crear un @BeforeEach
 @ExtendWith(MockitoExtension.class)
 class PacienteControllerTest {
 
     @Mock
-    private PacienteRepository pacienteRepository;
+    private PacienteService pacienteService;
 
     @InjectMocks
     private PacienteController pacienteController;
 
-    @Test
-    @DisplayName("Test para obtener todos los pacientes")
-    void testGetAllPacientes(){
+    private List<Paciente> pacientes;
 
-        // Seteo la fecha del paciente
+    @BeforeEach
+    void setup() {
         LocalDate fechaNac = LocalDate.of(2002, 8, 4);
+        pacientes = List.of(
+                new Paciente("12543674T", "Ruben", "Descalzo Rodriguez", fechaNac, "rubendes@hiberus.com", "C/ Maldonado 34, 5 Izq"),
+                new Paciente("13418945K", "Fernando", "Manson Ruiz", fechaNac, "fernandoman@hiberus.com", "C/ Colon 5, Bajo B")
+        );
+    }
 
-        Paciente paciente1 = new Paciente("12543674T", "Ruben", "Descalzo Rodriguez", fechaNac, "rubendes@hiberus.com", "C/ Maldonado 34, 5 Izq");
-        Paciente paciente2 = new Paciente("13418945K", "Fernando", "Manson Ruiz", fechaNac, "fernandoman@hiberus.com", "C/ Colon 5, Bajo B");
+    @Test
+    @DisplayName("Test 01 - para obtener todos los pacientes")
+    void testGetAllPacientes() {
+        // Configuracion del comportamiento del servicio
+        when(pacienteService.obtenerTodosLosPacientes()).thenReturn(pacientes);
 
-        // Configuracion del comportamiento del repositorio
-        when(pacienteRepository.findAll()).thenReturn(Arrays.asList(paciente1, paciente2));
-
-        // LLamo al metodo del controlador y hago un cast ya que devuelvo una list y quiero devolver una response entity para comprobar el status
+        // LLamo al metodo del controlador
         ResponseEntity<List<Paciente>> response = pacienteController.getPacientes();
 
         // Hago las comprobaciones de si devuelve el codigo de estado 200 OK y su tamaño es de 2 pacientes
-        assertEquals(200, response.getStatusCodeValue());
+        assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(2, response.getBody().size());
-
     }
 
     @Test
-    @DisplayName("Test para obtener un paciente")
-    void testGetPaciente(){
-        // Seteo la fecha del paciente
-        LocalDate fechanac = LocalDate.of(2002, 8, 4);
-        Paciente paciente1 = new Paciente("12543674T", "Ruben", "Descalzo Rodriguez", fechanac, "rubendes@hiberus.com", "C/ Maldonado 34, 5 Izq");
+    @DisplayName("Test 02 - para obtener un paciente")
+    void testGetPaciente() {
+        Paciente paciente = pacientes.get(0);
 
-        when(pacienteRepository.findByDni("12543674T")).thenReturn(paciente1);
+        when(pacienteService.obtenerPacientePorDni("12543674T")).thenReturn(paciente);
 
         ResponseEntity<Paciente> response = pacienteController.getPaciente("12543674T");
 
-        assertEquals(200, response.getStatusCodeValue());
+        assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals("Ruben", response.getBody().getNombre());
 
         // prueba con un DNI que no existe
+        when(pacienteService.obtenerPacientePorDni("12345678A")).thenReturn(null);
         response = pacienteController.getPaciente("12345678A");
 
-        // Sale 200 ya que devuelve un array vacio
-        assertEquals(404, response.getStatusCodeValue());
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
         assertEquals(null, response.getBody());
-
     }
 
     @Test
-    @DisplayName("Test para crear un paciente")
-    void testCreatePaciente(){
+    @DisplayName("Test 03 - para crear un paciente")
+    void testCreatePaciente() {
+        Paciente paciente = pacientes.get(0);
 
-        // Creo un paciente
-        LocalDate fechaNac = LocalDate.of(2002, 8, 4);
-        Paciente paciente1 = new Paciente("12543674T", "Ruben", "Descalzo Rodriguez", fechaNac, "rubendes@hiberus.com", "C/ Maldonado 34, 5 Izq");
+        when(pacienteService.existePacientePorDni(paciente.getDni())).thenReturn(false);
+        when(pacienteService.crearPaciente(paciente)).thenReturn(paciente);
 
-        when(pacienteRepository.save(paciente1)).thenReturn(paciente1);
+        ResponseEntity<Paciente> response = pacienteController.crearPaciente(paciente);
 
-        ResponseEntity<Paciente> response = pacienteController.crearPaciente(paciente1);
-
-        assertEquals(201, response.getStatusCodeValue());
-        assertEquals(paciente1.getDni(), response.getBody().getDni());
+        assertEquals(HttpStatus.CREATED, response.getStatusCode());
+        assertEquals(paciente.getDni(), response.getBody().getDni());
 
         // Añadir que pasa si cuando se quiere agregar un usuario con el mismo DNI mande un Conflict
+        when(pacienteService.existePacientePorDni(paciente.getDni())).thenReturn(true);
+        response = pacienteController.crearPaciente(paciente);
 
+        assertEquals(HttpStatus.CONFLICT, response.getStatusCode());
     }
 
     @Test
-    @DisplayName("Test para actualizar un paciente")
+    @DisplayName("Test 04 - para actualizar un paciente")
     void testUpdatePaciente() {
+        Paciente pacienteExistente = pacientes.get(0);
+        Paciente pacienteActualizado = new Paciente("12543674T", "Raul", "Rodriguez Carrion", pacienteExistente.getFechanac(), "rubendes@hiberus.com", "C/ Maldonado 34, 8 Izq");
 
-        // Creo un paciente existente
-        LocalDate fechaNac = LocalDate.of(2002, 8, 4);
-        Paciente paciente1 = new Paciente("12543674T", "Ruben", "Descalzo Rodriguez", fechaNac, "rubendes@hiberus.com", "C/ Maldonado 34, 5 Izq");
+        when(pacienteService.actualizarPaciente("12543674T", pacienteActualizado)).thenReturn(pacienteActualizado);
 
-        // Creo un paciente con datos actualizados
-        Paciente pacienteUpdate = new Paciente("12543674T", "Raul", "Rodriguez Carrion", fechaNac, "rubendes@hiberus.com", "C/ Maldonado 34, 8 Izq");
-
-        // Simulo que el paciente existe en el repositorio
-        when(pacienteRepository.findByDni("12543674T")).thenReturn(paciente1);
-
-        // Simulo que el repositorio guarda el paciente actualizado
-        when(pacienteRepository.save(paciente1)).thenReturn(pacienteUpdate);
-
-        // Llamo al método de actualización en el controlador
-        ResponseEntity<Paciente> response = pacienteController.actualizarPaciente("12543674T", pacienteUpdate);
-
-        // Verifico que el repositorio guardó el paciente actualizado
-        verify(pacienteRepository).save(paciente1);
-
+        ResponseEntity<Paciente> response = pacienteController.actualizarPaciente("12543674T", pacienteActualizado);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals("Raul", response.getBody().getNombre());
@@ -122,18 +109,14 @@ class PacienteControllerTest {
     }
 
     @Test
-    @DisplayName("Test para borrar un paciente")
+    @DisplayName("Test 05 - para borrar un paciente")
     void testDeletePaciente() {
-        // Simulo que el paciente existe en el repositorio
-        when(pacienteRepository.existsByDni("12543674T")).thenReturn(true);
+        when(pacienteService.existePacientePorDni("12543674T")).thenReturn(true);
 
-        // Llamo al método de eliminación en el controlador
         ResponseEntity<Void> response = pacienteController.eliminarPaciente("12543674T");
 
-        // Verifico que el repositorio intenta eliminar el paciente
-        verify(pacienteRepository).deleteByDni("12543674T");
+        verify(pacienteService).eliminarPacientePorDni("12543674T");
 
         assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
     }
-
 }

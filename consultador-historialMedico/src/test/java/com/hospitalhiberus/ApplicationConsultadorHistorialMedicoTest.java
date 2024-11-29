@@ -30,7 +30,6 @@ class ApplicationConsultadorHistorialMedicoTest {
     @DisplayName("Test 01 - Obtener todos los historiales Medicos")
     void testObtenerTodos() throws Exception {
         HistorialMedico historialMedico = new HistorialMedico();
-        historialMedico.setIdHistorial(1);
         historialMedico.setId("12345");
         historialMedico.setIdPaciente("12508523L");
         historialMedico.setFecha("2024-11-15");
@@ -49,7 +48,6 @@ class ApplicationConsultadorHistorialMedicoTest {
     void testObtenerPorId() throws Exception {
         HistorialMedico historialMedico = new HistorialMedico();
         historialMedico.setId("12345");
-        historialMedico.setIdHistorial(1);
         historialMedico.setIdPaciente("12508523L");
         historialMedico.setFecha("2024-11-15");
 

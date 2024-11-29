@@ -32,7 +32,6 @@ public class KafkaProducerServiceTest {
     void testEnviarHistorialMedico() {
         String topic = "historialMedico";
         HistorialMedicoValue historialMedicoValue = HistorialMedicoValue.newBuilder()
-                .setIdHistorial(1)
                 .setIdPaciente("123")
                 .setFecha("2023-11-27")
                 .setVisitas(List.of())

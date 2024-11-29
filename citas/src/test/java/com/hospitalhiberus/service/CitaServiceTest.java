@@ -12,8 +12,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
@@ -45,10 +43,9 @@ public class CitaServiceTest {
         List<Cita> citas = List.of(new Cita());
         when(repository.findAll()).thenReturn(citas);
 
-        ResponseEntity<List<Cita>> response = citaService.obtenerTodasLasCitas();
+        List<Cita> result = citaService.obtenerTodasLasCitas();
 
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(citas, response.getBody());
+        assertEquals(citas, result);
     }
 
     @Test
@@ -59,10 +56,9 @@ public class CitaServiceTest {
         doNothing().when(validacionService).verificarExistenciaPaciente(idPaciente);
         when(repository.findCitaByIdPaciente(idPaciente)).thenReturn(citas);
 
-        ResponseEntity<List<Cita>> response = citaService.obtenerCitasPorIdPaciente(idPaciente);
+        List<Cita> result = citaService.obtenerCitasPorIdPaciente(idPaciente);
 
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(citas, response.getBody());
+        assertEquals(citas, result);
     }
 
     @Test
@@ -75,14 +71,13 @@ public class CitaServiceTest {
         doNothing().when(validacionService).verificarExistenciaPaciente(cita.getIdPaciente());
         when(repository.save(cita)).thenReturn(cita);
 
-        ResponseEntity<Cita> response = citaService.crearCita(cita);
+        Cita result = citaService.crearCita(cita);
 
-        assertEquals(HttpStatus.CREATED, response.getStatusCode());
-        assertEquals(cita, response.getBody());
+        assertEquals(cita, result);
     }
 
     @Test
-    @DisplayName("test 04 - Completar una cita")
+    @DisplayName("Test 04 - Completar una cita")
     void testCompletarCita() {
         Integer idCita = 789;
         List<String> tratamiento = List.of("Tratamiento A");
@@ -96,22 +91,21 @@ public class CitaServiceTest {
         when(validacionService.obtenerCitaPorId(String.valueOf(idCita))).thenReturn(cita);
         when(repository.save(cita)).thenReturn(cita);
 
-        ResponseEntity<Cita> response = citaService.completarCita(String.valueOf(idCita), tratamiento);
+        Cita result = citaService.completarCita(String.valueOf(idCita), tratamiento);
 
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(ESTADOS.completada, response.getBody().getEstado());
+        assertEquals(ESTADOS.completada, result.getEstado());
         // Comprobacion que a los servicios de kafka se les llama exactamente una vez
         verify(kafkaService, times(1)).enviarHistorialMedico(any(), any(HistorialMedicoValue.class));
         verify(kafkaService, times(1)).enviarFactura(any(), any(FacturaValue.class));
     }
 
     @Test
-    @DisplayName("Test 05 - Completa una cita con tratamiento vacio")
+    @DisplayName("Test 05 - Completa una cita con tratamiento vacío")
     void testCompletarCitaConTratamientoVacio() {
         Integer idCita = 789;
         when(validacionService.obtenerCitaPorId(String.valueOf(idCita))).thenReturn(new Cita());
 
-        assertThrows(ResponseStatusException.class, () -> citaService.completarCita(String.valueOf(idCita), List.of()));
+        assertThrows(IllegalArgumentException.class, () -> citaService.completarCita(String.valueOf(idCita), List.of()));
     }
 
     @Test
@@ -123,10 +117,8 @@ public class CitaServiceTest {
         when(validacionService.obtenerCitaPorId(String.valueOf(idCita))).thenReturn(cita);
         when(repository.save(cita)).thenReturn(cita);
 
-        ResponseEntity<Cita> response = citaService.cancelarCita(String.valueOf(idCita));
+        Cita result = citaService.cancelarCita(String.valueOf(idCita));
 
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(ESTADOS.cancelada, response.getBody().getEstado());
+        assertEquals(ESTADOS.cancelada, result.getEstado());
     }
 }
-

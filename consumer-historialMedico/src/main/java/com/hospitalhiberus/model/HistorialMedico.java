@@ -12,7 +12,6 @@ public class HistorialMedico {
 
     @Id
     private String id;
-    private Integer idHistorial;
     private String idPaciente;
     private String fecha;
     private List<Visita> visitas;

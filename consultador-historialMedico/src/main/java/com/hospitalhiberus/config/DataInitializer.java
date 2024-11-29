@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.Arrays;
 
-@Configuration
+// @Configuration // Descomentar si se quieren probar las consultas
 public class DataInitializer {
 
     @Autowired
@@ -23,7 +23,6 @@ public class DataInitializer {
 
             // Creo datos de prueba
             HistorialMedico h1 = new HistorialMedico();
-            h1.setIdHistorial(1);
             h1.setIdPaciente("12508523L");
             h1.setFecha("2024-11-15");
 

@@ -1,7 +1,7 @@
 package com.hospitalhiberus.controller;
 
 import com.hospitalhiberus.model.Paciente;
-import com.hospitalhiberus.repository.PacienteRepository;
+import com.hospitalhiberus.service.PacienteService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -15,63 +15,55 @@ import java.util.List;
 
 @Slf4j
 @RestController
-// Se puede añadir un @RequestMapping("/pacientes"),pero quiero seguis la estructura de la API Medicos
 public class PacienteController {
 
     @Autowired
-    private PacienteRepository pacienteRepository;
+    private PacienteService pacienteService;
 
     @GetMapping("/pacientes")
-    public ResponseEntity<List<Paciente>> getPacientes(){
-        return new ResponseEntity<>(pacienteRepository.findAll(), HttpStatus.OK);
+    public ResponseEntity<List<Paciente>> getPacientes() {
+        List<Paciente> pacientes = pacienteService.obtenerTodosLosPacientes();
+        if (pacientes.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(pacientes);
     }
 
     @PostMapping("/pacientes")
-    public ResponseEntity<Paciente> crearPaciente(@RequestBody Paciente paciente){
+    public ResponseEntity<Paciente> crearPaciente(@RequestBody Paciente paciente) {
         log.info("Datos recibidos: " + paciente);
-        if (pacienteRepository.existsByDni(paciente.getDni())) {
-            return new ResponseEntity<>(HttpStatus.CONFLICT); // Si el DNI ya existe
+        if (pacienteService.existePacientePorDni(paciente.getDni())) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).build(); // Si el DNI ya existe
         }
-        return new ResponseEntity<>(pacienteRepository.save(paciente), HttpStatus.CREATED);
+        Paciente nuevoPaciente = pacienteService.crearPaciente(paciente);
+        return ResponseEntity.status(HttpStatus.CREATED).body(nuevoPaciente);
     }
-
 
     @GetMapping("/pacientes/{dni}")
-    public ResponseEntity<Paciente> getPaciente(@PathVariable("dni") String dni){
-        Paciente paciente = pacienteRepository.findByDni(dni);
+    public ResponseEntity<Paciente> getPaciente(@PathVariable("dni") String dni) {
+        Paciente paciente = pacienteService.obtenerPacientePorDni(dni);
         if (paciente == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return ResponseEntity.notFound().build();
         }
-        return new ResponseEntity<>(paciente, HttpStatus.OK);
+        return ResponseEntity.ok(paciente);
     }
-
 
     @PutMapping("/pacientes/{dni}")
     public ResponseEntity<Paciente> actualizarPaciente(@PathVariable("dni") String dni, @RequestBody Paciente paciente) {
-        Paciente pacienteActual = pacienteRepository.findByDni(dni);
-        if (pacienteActual == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        Paciente pacienteActualizado = pacienteService.actualizarPaciente(dni, paciente);
+        if (pacienteActualizado == null) {
+            return ResponseEntity.notFound().build();
         }
-
-        pacienteActual.setNombre(paciente.getNombre());
-        pacienteActual.setApellidos(paciente.getApellidos());
-        pacienteActual.setFechanac(paciente.getFechanac());
-        pacienteActual.setEmail(paciente.getEmail());
-        pacienteActual.setDireccion(paciente.getDireccion());
-
-        return new ResponseEntity<>(pacienteRepository.save(pacienteActual), HttpStatus.OK);
+        return ResponseEntity.ok(pacienteActualizado);
     }
-
 
     @DeleteMapping("/pacientes/{dni}")
     @Transactional
-    public ResponseEntity<Void> eliminarPaciente(@PathVariable("dni") String dni){
-        if (!pacienteRepository.existsByDni(dni)) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    public ResponseEntity<Void> eliminarPaciente(@PathVariable("dni") String dni) {
+        if (!pacienteService.existePacientePorDni(dni)) {
+            return ResponseEntity.notFound().build();
         }
-        pacienteRepository.deleteByDni(dni);
+        pacienteService.eliminarPacientePorDni(dni);
         return ResponseEntity.noContent().build();
     }
-
-
 }

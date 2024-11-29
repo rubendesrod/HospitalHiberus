@@ -15,7 +15,6 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
 import java.util.List;
-
 @Service
 public class CitaService {
 
@@ -28,57 +27,54 @@ public class CitaService {
     @Autowired
     private KafkaProducerService kafkaService;
 
-    public ResponseEntity<List<Cita>> obtenerTodasLasCitas(){
-        return new ResponseEntity<>(repository.findAll(), HttpStatus.OK );
+    public List<Cita> obtenerTodasLasCitas(){
+        return repository.findAll();
     }
 
-    public ResponseEntity<List<Cita>> obtenerCitasPorIdPaciente(String idPaciente){
+    public List<Cita> obtenerCitasPorIdPaciente(String idPaciente){
         validacionService.verificarExistenciaPaciente(idPaciente);
-         return new ResponseEntity<>(repository.findCitaByIdPaciente(idPaciente), HttpStatus.OK);
-
-    };
-
-    public ResponseEntity<List<Cita>> obtenerCitasPorIdMedico(String idMedico){
-        validacionService.verificarExistenciaMedico(idMedico);
-        return new ResponseEntity<>(repository.findCitaByIdMedico(idMedico), HttpStatus.OK);
+        return repository.findCitaByIdPaciente(idPaciente);
     }
 
-    public ResponseEntity<List<Cita>> obtenerCitasPorIdMedicoYEstado(String idMedico, ESTADOS estado){
+    public List<Cita> obtenerCitasPorIdMedico(String idMedico){
         validacionService.verificarExistenciaMedico(idMedico);
-        return new ResponseEntity<>(repository.findCitaByIdMedicoAndEstado(idMedico, estado), HttpStatus.OK);
+        return repository.findCitaByIdMedico(idMedico);
     }
 
-    public ResponseEntity<Cita> crearCita(Cita cita) {
+    public List<Cita> obtenerCitasPorIdMedicoYEstado(String idMedico, ESTADOS estado){
+        validacionService.verificarExistenciaMedico(idMedico);
+        return repository.findCitaByIdMedicoAndEstado(idMedico, estado);
+    }
+
+    public Cita crearCita(Cita cita) {
         validacionService.verificarExistenciaMedico(cita.getIdMedico());
         validacionService.verificarExistenciaPaciente(cita.getIdPaciente());
-        return new ResponseEntity<>(repository.save(cita), HttpStatus.CREATED);
+        return repository.save(cita);
     }
 
-
-    public ResponseEntity<Cita> completarCita(String idCita, List<String> tratamiento) {
+    public Cita completarCita(String idCita, List<String> tratamiento) {
         Cita cita = validacionService.obtenerCitaPorId(idCita);
         cita.setEstado(ESTADOS.completada);
 
         if (tratamiento == null || tratamiento.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El tratamiento no puede estar vacío");
+            throw new IllegalArgumentException("El tratamiento no puede estar vacío");
         }
 
         repository.save(cita);
 
         // Builder de Avro Historial Medico
         HistorialMedicoValue historialMedico = HistorialMedicoValue.newBuilder()
-            .setIdHistorial(cita.getId().hashCode())
-            .setIdPaciente(cita.getIdPaciente())
-            .setFecha(String.valueOf(LocalDate.now()))
-            .setVisitas(List.of(
-                Visita.newBuilder()
-                    .setFechaVisita(cita.getFecha().toString())
-                    .setHora(String.valueOf(cita.getHora()))
-                    .setTratamiento(tratamiento)
-                    .setMotivo(cita.getMotivo())
-                    .build()
-            ))
-            .build();
+                .setIdPaciente(cita.getIdPaciente())
+                .setFecha(String.valueOf(LocalDate.now()))
+                .setVisitas(List.of(
+                        Visita.newBuilder()
+                                .setFechaVisita(cita.getFecha().toString())
+                                .setHora(String.valueOf(cita.getHora()))
+                                .setTratamiento(tratamiento)
+                                .setMotivo(cita.getMotivo())
+                                .build()
+                ))
+                .build();
 
         // Builder del Avro Factura
         FacturaValue factura = FacturaValue.newBuilder()
@@ -94,18 +90,15 @@ public class CitaService {
             kafkaService.enviarFactura("facturas", factura);
         } catch (KafkaException e) {
             System.out.println("No se ha podido enviar el historial al topic historialMedico");
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al procesar el historial médico");
+            throw new RuntimeException("Error al procesar el historial médico");
         }
 
-
-        return ResponseEntity.ok(cita);
+        return cita;
     }
 
-    public ResponseEntity<Cita> cancelarCita(String idCita) {
+    public Cita cancelarCita(String idCita) {
         Cita cita = validacionService.obtenerCitaPorId(idCita);
         cita.setEstado(ESTADOS.cancelada);
-        return new ResponseEntity<>(repository.save(cita), HttpStatus.OK);
+        return repository.save(cita);
     }
-
-
 }
