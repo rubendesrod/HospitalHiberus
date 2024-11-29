@@ -1,12 +1,46 @@
 # 🏥 Hospital Hiberus 🏥
 
 ## Guía de uso 📋
-// TODO
+Primero clonar el repositorio en nuesta máquina
+<br>
+```git clone https://github.com/rubendesrod/HospitalHiberus.git```
+<br><br>
+
+lo siguiente es ejecutar el docker-compose ```docker-compose up -d``` [-d por si queremos ejecuar en segundo plano los contenedores, quitar si se quieren ver los log en la terminal]
+
+* En el caso de que el contenedor de sonqube en docker no se inicie con los siguientes pasos se arregla
+ ```bash
+ # Abrir una teminal en windows
+ wsl -d docker-desktop
+ # Ejecutar el siguiente comando
+ sysctl -w vm.max_map_count=262144
+ # para que se guarden los cambios
+ systcl -p
+ ```
+Hechos esos cambios debería de funcionar el contenedor de sonqube,
+ accedemos al [Sonarqube - click](http://localhost:9090) y metemos los datos admin y admin.
+Una vez accedemos a sonar vamos a -> [**My Account -> Security**](http://localhost:9090/account/security)
+y creamos nuestro Token, el cuál copiaremos e introduciremos en el [pom.xml](./pom.xml), cambiando la propetie de sonar.token
+por el token que hemos generado
+
+
+Una vez se inicien todos los contenedores sin errores, ir a la carpeta de ``cd /pago-factura`` y ejecutar los siguientes comando
+
 ```bash 
   # Para que funcione el producer de python
   pip install confluent-kafka[avro]
   pip install urllib3
  ```
+
+Por último, abrir una terminal o nuestro IDE, y ejecutar un
+```mvn clean```  -> ```mvn install``` -> ```mvn sonar:sonar``` -> ```mvn surefire:test```
+
+Ya tenemos nuestro proyecto compilado, solo falta arrancar los main de lo microservicios java,
+1. config-server
+2. eureka-server
+3. gateway-server
+4. Cualquier servicio
+
 
 ## Documentación 🗒️
 * Config server: http://localhost:8888/nombre_servicio/default
@@ -14,6 +48,7 @@
 * Gateway server: http://localhost:9000/EndPoint
 * [Kowl (Interfaz para Kafka)](http://localhost:8080/topics)
 * [Zipkin (Monitorización de Trazas)](http://localhost:9411/zipkin/)
+* [Sonarqube](http://localhost:9090/)
 
 #### URLs al swagger ⛓️‍💥
 * [Swagger Pacientes](http://localhost:8086/swagger-ui/index.html)

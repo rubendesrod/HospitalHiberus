@@ -42,12 +42,12 @@ public class DataInitializer {
             f3.setEstado(ESTADOS.pendiente);
             f3.setTotalPagar(650);
 
-            System.out.println("Insertando datos de prueba...");
+            log.info("Insertando datos de prueba...");
             log.info("Factura 1" + f1);
             log.info("Factura 2" + f1);
             log.info("Factura 3" + f1);
             repository.saveAll(Arrays.asList(f1,f2,f3));
-            System.out.println("Datos de prueba insertados en MySQL_Facturas");
+            log.info("Datos de prueba insertados en MySQL_Facturas");
         };
     }
 }
