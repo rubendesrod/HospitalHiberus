@@ -6,15 +6,16 @@ import com.hospitalhiberus.avro.Visita;
 import com.hospitalhiberus.model.Cita;
 import com.hospitalhiberus.model.ESTADOS;
 import com.hospitalhiberus.repository.CitaRepository;
+
+import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.kafka.KafkaException;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
 import java.util.List;
+@Slf4j
 @Service
 public class CitaService {
 
@@ -60,6 +61,7 @@ public class CitaService {
             throw new IllegalArgumentException("El tratamiento no puede estar vacío");
         }
 
+    
         repository.save(cita);
 
         // Builder de Avro Historial Medico
@@ -89,7 +91,7 @@ public class CitaService {
             kafkaService.enviarHistorialMedico("historialMedico", historialMedico);
             kafkaService.enviarFactura("facturas", factura);
         } catch (KafkaException e) {
-            System.out.println("No se ha podido enviar el historial al topic historialMedico");
+            log.info("No se ha podido enviar el historial al topic historialMedico");
             throw new RuntimeException("Error al procesar el historial médico");
         }
 

@@ -1,10 +1,11 @@
 # 🏥 Hospital Hiberus 🏥
+*Proyecto de Desarrollo de Software en la **Hiberus University**, con microservicios.*
 
 ## Guía de uso 📋
 Primero clonar el repositorio en nuesta máquina
 <br>
 ```git clone https://github.com/rubendesrod/HospitalHiberus.git```
-<br><br>
+<br>
 
 lo siguiente es ejecutar el docker-compose ```docker-compose up -d``` [-d por si queremos ejecuar en segundo plano los contenedores, quitar si se quieren ver los log en la terminal]
 
@@ -32,7 +33,7 @@ Una vez se inicien todos los contenedores sin errores, ir a la carpeta de ``cd /
   pip install urllib3
  ```
 
-Por último, abrir una terminal o nuestro IDE, y ejecutar un
+Por último, abrir una terminal o nuestro IDE, y ejecutar un (asegurar que esta instalado lombok, o que el IDE tiene activado en las settings del compiler que compile las notaciones)
 ```mvn clean```  -> ```mvn install``` -> ```mvn sonar:sonar``` -> ```mvn surefire:test```
 
 Ya tenemos nuestro proyecto compilado, solo falta arrancar los main de lo microservicios java,

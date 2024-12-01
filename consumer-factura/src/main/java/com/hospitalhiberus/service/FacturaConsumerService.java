@@ -41,6 +41,7 @@ public class FacturaConsumerService {
       Factura factura = new Factura();
       factura.setTotalPagar(avro.getTotalPagar());
       factura.setFechaEmision(LocalDate.parse(avro.getFechaEmision()));
+      log.info("La fecha de emision es " + factura.getFechaEmision());
       factura.setIdMedico(avro.getIdMedico());
       factura.setEstado(ESTADOS.pendiente);
       return factura;
