@@ -3,6 +3,7 @@ package com.hospitalhiberus.service;
 import com.hospitalhiberus.feign.MedicoClient;
 import com.hospitalhiberus.feign.PacienteClient;
 import com.hospitalhiberus.model.Cita;
+import com.hospitalhiberus.model.ESTADOS;
 import com.hospitalhiberus.repository.CitaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -48,6 +49,12 @@ public class ValidacionService {
         Integer idCitaInt = Integer.parseInt(idCita);
         return repository.findById(idCitaInt)
                 .orElseThrow(() -> new RuntimeException("La cita con ID " + idCita + " no existe."));
+    }
+
+    public void verificarCitaCompletada(ESTADOS estado) {
+        if (estado == ESTADOS.completada || estado == ESTADOS.cancelada) {
+            throw new RuntimeException("La cita no puede ser completada, su estado actual es " + estado);
+        }
     }
 }
 

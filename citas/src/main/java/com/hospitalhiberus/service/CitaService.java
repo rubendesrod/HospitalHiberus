@@ -55,12 +55,15 @@ public class CitaService {
 
     public Cita completarCita(String idCita, List<String> tratamiento) {
         Cita cita = validacionService.obtenerCitaPorId(idCita);
+        
+        validacionService.verificarExistenciaMedico(cita.getIdMedico());
+        validacionService.verificarExistenciaPaciente(cita.getIdPaciente());
+        validacionService.verificarCitaCompletada(cita.getEstado());
+        
         cita.setEstado(ESTADOS.completada);
-
         if (tratamiento == null || tratamiento.isEmpty()) {
             throw new IllegalArgumentException("El tratamiento no puede estar vacío");
         }
-
     
         repository.save(cita);
 
@@ -91,8 +94,8 @@ public class CitaService {
             kafkaService.enviarHistorialMedico("historialMedico", historialMedico);
             kafkaService.enviarFactura("facturas", factura);
         } catch (KafkaException e) {
-            log.info("No se ha podido enviar el historial al topic historialMedico");
-            throw new RuntimeException("Error al procesar el historial médico");
+            log.info("No se ha podido enviar el historial al topic historialMedico y factura");
+            throw new RuntimeException("Error al procesar el historial médico y la factura");
         }
 
         return cita;

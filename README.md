@@ -18,8 +18,8 @@ lo siguiente es ejecutar el docker-compose ```docker-compose up -d``` [-d por si
  # para que se guarden los cambios
  systcl -p
  ```
-Hechos esos cambios debería de funcionar el contenedor de sonqube,
- accedemos al [Sonarqube - click](http://localhost:9090) y metemos los datos admin y admin.
+Hechos esos cambios debería de funcionar el contenedor de sonqube.
+ Accedemos al [Sonarqube - click](http://localhost:9090) y metemos los datos admin y admin.
 Una vez accedemos a sonar vamos a -> [**My Account -> Security**](http://localhost:9090/account/security)
 y creamos nuestro Token, el cuál copiaremos e introduciremos en el [pom.xml](./pom.xml), cambiando la propetie de sonar.token
 por el token que hemos generado
@@ -46,7 +46,7 @@ Ya tenemos nuestro proyecto compilado, solo falta arrancar los main de lo micros
 ## Documentación 🗒️
 * Config server: http://localhost:8888/nombre_servicio/default
 * [Eureka server](http://localhost:8761)
-* Gateway server: http://localhost:9000/EndPoint
+* Gateway server: http://localhost:9000/(Endpoint de la API)
 * [Kowl (Interfaz para Kafka)](http://localhost:8080/topics)
 * [Zipkin (Monitorización de Trazas)](http://localhost:9411/zipkin/)
 * [Sonarqube](http://localhost:9090/)
@@ -98,6 +98,7 @@ Ya tenemos nuestro proyecto compilado, solo falta arrancar los main de lo micros
 ### comunicación y despliegue
 * Spring cloud [ Config Server, Gateway, Eureka ]
 * Kafka [ Zookeper, Schema-Registry, Kowl ]
+* Feign [ Cliente para consultar los microservicios ]
 * Zipkin [ Monitorización en la trazas de los servicios ]
 * Docker [ Docker-compose, Dockerfile ]
 * github [ control de versiones ]
@@ -109,7 +110,7 @@ Ya tenemos nuestro proyecto compilado, solo falta arrancar los main de lo micros
 
 ### Lenguajes
 * Java [Spring Boot]
-* TypeScript [Node.Express]
+* TypeScript [Node.Express, Jest]
 * Pyhton
 
 
