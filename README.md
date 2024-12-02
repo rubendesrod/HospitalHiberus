@@ -32,13 +32,15 @@ Una vez se inicien todos los contenedores sin errores, ir a la carpeta de ``cd /
  ```
 
 Por último, abrir una terminal o nuestro IDE, y ejecutar un (asegurar que esta instalado lombok, o que el IDE tiene activado en las settings del compiler que compile las notaciones)
-```mvn clean```  -> ```mvn install``` -> ```mvn sonar:sonar```[En cada microservicio java o en el princial] -> ```mvn surefire:test```, una vez hecho esto para los microservicios de java, ir a la raiz del microservici [medicos](./medicos/), ejecutames el siguiente comando que genera un reporte LCOV para sonar ```npx jest --coverage``` y luego ejecuta ```npx sonar-scanner```
+```mvn clean```  -> ```mvn install``` -> ```mvn sonar:sonar```[En cada microservicio java o en el princial] -> ```mvn surefire:test```, una vez hecho esto para los microservicios de java, ir a la raiz del microservicio [medicos](./medicos/), ejecutames el siguiente comando que genera un reporte LCOV para sonar ```npx jest --coverage``` y luego ejecuta ```npx sonar-scanner```
 
 Ya tenemos nuestro proyecto compilado, solo falta arrancar los main de lo microservicios java,
 1. config-server
 2. eureka-server
 3. gateway-server
 4. Cualquier servicio
+
+*Si el microservicio medicos se quiere arrancar en local habría que ir desde la terminal a la carpeta raiz del microservicio [medicos](./medicos/), y ejecutar lo siguiente ```npm install``` y lo siguiente sería ````npm start | npm run start```*
 
 
 ## Documentación 🗒️

@@ -207,6 +207,28 @@ services:
       - facturas_data:/var/lib/mysql
       - ./init-db/init-db-facturas:/docker-entrypoint-initdb.d
 
+  #config-server
+  config-server:
+    build:
+      context: ./config-server
+      dockerfile: Dockerfile
+    container_name: config-server
+    ports:
+      - "8888:8888"
+    env_file:
+      - .env
+
+  #eureka-server
+  eureka-server:
+    build:
+      context: ./eureka-server
+      dockerfile: Dockerfile
+    container_name: eureka-server
+    ports:
+      - "8761:8761"
+    env_file:
+      - .env
+
   # Microservicio Medicos
   medicos-service:
     build:
@@ -219,6 +241,19 @@ services:
       - .env
     depends_on:
       - db_medicos
+
+  #Microservicio Pacientes
+  pacientes-service:
+    build:
+      context: ./pacientes
+      dockerfile: Dockerfile
+    container_name: pacientes-service
+    ports:
+      - "8086:8086"
+    env_file:
+      - .env
+    depends_on:
+      - db_pacientes
 
 # Volumenes para la persistencia de los datos en la DB
 volumes:
