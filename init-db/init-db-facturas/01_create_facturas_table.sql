@@ -4,5 +4,5 @@ CREATE TABLE IF NOT EXISTS facturas (
   fechaEmision DATE NOT NULL,
   totalPagar INT NOT NULL,
   estado ENUM('pendiente', 'pagado') NOT NULL,
-  fechaPago DATE
+  fechaPago DATE NULL
 );

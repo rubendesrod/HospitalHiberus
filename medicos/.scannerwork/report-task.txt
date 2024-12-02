@@ -1,6 +1,0 @@
-projectKey=microservicio-medicos
-serverUrl=http://localhost:9090
-serverVersion=10.7.0.96327
-dashboardUrl=http://localhost:9090/dashboard?id=microservicio-medicos
-ceTaskId=c9842d2d-f8e8-4e23-9464-6094f674d8e9
-ceTaskUrl=http://localhost:9090/api/ce/task?id=c9842d2d-f8e8-4e23-9464-6094f674d8e9

@@ -17,6 +17,7 @@ logs/
 **/log/
 
 # Node.js
+.scannerwork/
 coverage/
 dist/
 node_modules/

@@ -4,3 +4,9 @@ spring:
       probability: 1.0 # Captura el 100% de las trazas
   zipkin:
     base-url: http://${HOST_ZIPKIN:localhost}:9411 # Dirección del servicio Zipkin
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: info

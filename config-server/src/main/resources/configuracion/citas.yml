@@ -29,8 +29,14 @@ spring:
             sql:
               BasicBinder: TRACE
 
+info:
+  app:
+    name: Microservicio de Citas
+    description: Este es el microservicio encargado de gestionar las citas y relacionarse con Kafka y otros microservicios.
+    version: 1.0.0
+    status: Activo
+
 logging:
   level:
-    org.hibernate.SQL: DEBUG  # Muestra las consultas SQL generadas por Hibernate
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE  # Muestra los valores enlazados en las consultas
     org.springframework: INFO  # Ajusta según sea necesario para limitar la verbosidad

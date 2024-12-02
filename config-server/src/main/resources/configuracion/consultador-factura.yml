@@ -16,7 +16,14 @@ spring:
         format_sql: true
         dialect: org.hibernate.dialect.MySQLDialect
 
+info:
+  app:
+    name: Microservicio de Consultador-Facturas
+    description: Este es el microservicio encargado de gestionar la devolución de los datos de las facturas.
+    version: 1.0.0
+    status: Activo
+
 logging:
   level:
-    org.hibernate.SQL: DEBUG # Muestra las consultas SQL generadas
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE  # Muestra los valores enlazados en las consultas
     org.hibernate.type.descriptor.sql: TRACE # Muestra los valores de los parámetros en las consultas

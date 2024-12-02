@@ -5,3 +5,10 @@ spring:
   data:
     mongodb:
       uri: mongodb://historialmedico_user:historialmedico_password@${DB_HISTORIALES:localhost}:${PORT_MONGO:27017}/historialmedico_db
+
+info:
+  app:
+    name: Microservicio de Consultador-HistorialMedico
+    description: Este es el microservicio encargado de gestionar la devolución de los hisotriales médicos de los pacientes.
+    version: 1.0.0
+    status: Activo
