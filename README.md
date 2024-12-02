@@ -19,7 +19,7 @@ lo siguiente es ejecutar el docker-compose ```docker-compose up -d``` [-d por si
 Hechos ese cambios debería de funcionar el contenedor de sonqube.
  Accedemos al [Sonarqube - click](http://localhost:9090) y metemos los datos admin y admin.
 Una vez accedemos a sonar vamos a -> [**My Account -> Security**](http://localhost:9090/account/security)
-y creamos nuestro Token, el cuál copiaremos e introduciremos en el [pom.xml](./pom.xml), cambiando la propetie de sonar.token
+y creamos nuestro Token, el cuál copiaremos e introduciremos en el [pom.xml](./pom.xml) del proyecto princial, o en el de los microservicios, cambiando la properties de sonar.token
 por el token que hemos generado
 
 
@@ -32,7 +32,7 @@ Una vez se inicien todos los contenedores sin errores, ir a la carpeta de ``cd /
  ```
 
 Por último, abrir una terminal o nuestro IDE, y ejecutar un (asegurar que esta instalado lombok, o que el IDE tiene activado en las settings del compiler que compile las notaciones)
-```mvn clean```  -> ```mvn install``` -> ```mvn sonar:sonar``` -> ```mvn surefire:test```, una vez hecho esto para los microservicios de java, ir a la raiz del microservici [medicos](./medicos/), ejecutames el siguiente comando que genera un reporte LCOV para sonar ```npx jest --coverage``` y luego ejecuta ```sonar-scanner```
+```mvn clean```  -> ```mvn install``` -> ```mvn sonar:sonar```[En cada microservicio java o en el princial] -> ```mvn surefire:test```, una vez hecho esto para los microservicios de java, ir a la raiz del microservici [medicos](./medicos/), ejecutames el siguiente comando que genera un reporte LCOV para sonar ```npx jest --coverage``` y luego ejecuta ```npx sonar-scanner```
 
 Ya tenemos nuestro proyecto compilado, solo falta arrancar los main de lo microservicios java,
 1. config-server

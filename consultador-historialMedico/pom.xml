@@ -18,7 +18,7 @@
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <sonar.host.url>http:/localhost:9090</sonar.host.url>
-        <sonar.token>sqa_eb2da1a7b4465a5ff9631d2811fcb6274e2a5db3</sonar.token>
+        <sonar.token>sqa_0d9f281b1f056fb86fc9431db50aa1703f7661b8</sonar.token>
         <sonar.sources>src/main/java</sonar.sources>
         <sonar.tests>src/test/java</sonar.tests>
     </properties>

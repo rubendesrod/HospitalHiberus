@@ -14,4 +14,4 @@ spring:
         schema.registry.url: http://${HOST_SCHEMA_REGISTRY:localhost}:8081
   data:
     mongodb:
-      uri: mongodb://historialmedico_user:historialmedico_password@${DB_HISTORIALES:localhost}:27017/historialmedico_db
+      uri: mongodb://historialmedico_user:historialmedico_password@${DB_HISTORIALES:localhost}:${PORT_MONGO:27017}/historialmedico_db
