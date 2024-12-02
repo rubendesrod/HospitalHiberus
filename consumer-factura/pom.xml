@@ -20,6 +20,10 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring.kafka.version>2.8.9</spring.kafka.version>
         <kafka.clients.version>3.5.0</kafka.clients.version>
+        <sonar.host.url>http:/localhost:9090</sonar.host.url>
+        <sonar.token>sqa_eb2da1a7b4465a5ff9631d2811fcb6274e2a5db3</sonar.token>
+        <sonar.sources>src/main/java</sonar.sources>
+        <sonar.tests>src/test/java</sonar.tests>
     </properties>
     <repositories>
         <repository>

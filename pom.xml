@@ -114,12 +114,6 @@
         <artifactId>sonar-maven-plugin</artifactId>
         <version>3.9.1.2184</version>
       </plugin>
-      <!-- Maven Surefire Plugin: Para ejecutar los tests y generar informes JUnit -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <version>3.0.0-M5</version>
-      </plugin>
     </plugins>
   </build>
 
