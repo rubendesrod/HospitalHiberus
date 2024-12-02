@@ -40,7 +40,7 @@ Ya tenemos nuestro proyecto compilado, solo falta arrancar los main de lo micros
 3. gateway-server
 4. Cualquier servicio
 
-*Si el microservicio medicos se quiere arrancar en local habría que ir desde la terminal a la carpeta raiz del microservicio [medicos](./medicos/), y ejecutar lo siguiente ```npm install``` y lo siguiente sería ````npm start | npm run start```*
+*Si el microservicio medicos se quiere arrancar en local habría que ir desde la terminal a la carpeta raiz del microservicio [medicos](./medicos/), y ejecutar lo siguiente ```npm install``` y lo siguiente sería ````npm start``` o ```npm run start```*
 
 
 ## Documentación 🗒️
