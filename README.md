@@ -7,7 +7,8 @@ Primero clonar el repositorio en nuesta máquina
 ```git clone https://github.com/rubendesrod/HospitalHiberus.git```
 <br>
 
-lo siguiente es ejecutar el docker-compose ```docker-compose up -d``` [-d por si queremos ejecuar en segundo plano los contenedores, quitar si se quieren ver los log en la terminal]
+Vamos a la carpeta raíz del proyecto [HospitalHiberus](./) y ejecutamos ````mvn clean```` ````mvn install````
+una vez se hayan generado las carpetas ***/target***, arrancamos sonar con ````docker-compose up sonarqube```` [si se quiere ejecutar en segundo plano añade **-d** ].
 
 * En el caso de que el contenedor de sonqube en docker no se inicie con los siguientes pasos se arregla
  ```bash
@@ -16,32 +17,43 @@ lo siguiente es ejecutar el docker-compose ```docker-compose up -d``` [-d por si
  # Ejecutar el siguiente comando
  sysctl -w vm.max_map_count=262144
  ```
+
 Hechos ese cambios debería de funcionar el contenedor de sonqube.
  Accedemos al [Sonarqube - click](http://localhost:9090) y metemos los datos admin y admin.
 Una vez accedemos a sonar vamos a -> [**My Account -> Security**](http://localhost:9090/account/security)
-y creamos nuestro Token, el cuál copiaremos e introduciremos en el [pom.xml](./pom.xml) del proyecto princial, o en el de los microservicios, cambiando la properties de sonar.token
+y creamos nuestro Token, el cuál copiaremos e introduciremos en el [pom.xml](./pom.xml) del proyecto princial o en el de los microservicios si se quiere subir cada uno de ellos por separado, cambiando la properties de sonar.token
 por el token que hemos generado
 
+lo siguientes es hacer que nuestro proyecto se suba a sonar, vamos a la carpeta principal de cada uno de los microservicio 
+o solo en la prinicipal, y ejecutamos ````mvn sona:sonar````, ahora se podría ver como en el apartado de proyects en sonar nos aparece nuestros microservicios o el proyecto entero
 
-Una vez se inicien todos los contenedores sin errores, ir a la carpeta de ``cd /pago-factura`` y ejecutar los siguientes comando
+Cuando ya hemos subido los proyectos java a sonar, ahora toca subir el de typescript [microservicio-medicos](./medicos) abrimos una consola en  la capeta raíz,
+ ejecutamos ```npm install``` y ejecutamos ```npx jest --coverage``` para generar un reporte LCOV para sonar
+y por ultimo ejecutamos ```npx sonar-scanner```, y nuestro proyecto empezará a subirse a sonar
+
+Ir a la carpeta de ``cd /pago-factura`` y ejecutar los siguientes comando
 
 ```bash 
   # Para que funcione el producer de python
   pip install confluent-kafka[avro]
   pip install urllib3
  ```
+[ *El script de pyhton que contiene esa carpeta nos efectua el pago de las facturas de un medico, uso ```python pruducer_factura.py <IdFactura>```* ]
 
-Por último, abrir una terminal o nuestro IDE, y ejecutar un (asegurar que esta instalado lombok, o que el IDE tiene activado en las settings del compiler que compile las notaciones)
-```mvn clean```  -> ```mvn install``` -> ```mvn sonar:sonar```[En cada microservicio java o en el princial] -> ```mvn surefire:test```, una vez hecho esto para los microservicios de java, ir a la raiz del microservicio [medicos](./medicos/), ejecutames el siguiente comando que genera un reporte LCOV para sonar ```npx jest --coverage``` y luego ejecuta ```npx sonar-scanner```
+Ahora nuestro proyecto tiene dos maneras de ser arrancado, aunque si o si kafka, zookeeper, schema-registry, las bases de 
+datos, sonar, kowl y zipkin tienen que ser arrancado con contenedores, los microservicios
+pueden ser arrancados desde sus ApplicationMain.
 
-Ya tenemos nuestro proyecto compilado, solo falta arrancar los main de lo microservicios java,
 1. config-server
 2. eureka-server
 3. gateway-server
 4. Cualquier servicio
 
-*Si el microservicio medicos se quiere arrancar en local habría que ir desde la terminal a la carpeta raiz del microservicio [medicos](./medicos/), y ejecutar lo siguiente ```npm install``` y lo siguiente sería ```npm start``` o ```npm run start```*
+*Si el microservicio medicos se quiere arrancar en local habría que ir desde la terminal a la carpeta raiz del microservicio 
+[medicos](./medicos/), y ejecutar lo siguiente ```npm install``` y lo siguiente sería ```npm start``` o ```npm run start```*
 
+Si queremos ejecutar todo con docker, podemos hacer un ```docker-compose up -d``` y se ejecutarían todos los contenedores en
+segundo plano.
 
 ## Documentación 🗒️
 * Config server: http://localhost:8888/nombre_servicio/default
