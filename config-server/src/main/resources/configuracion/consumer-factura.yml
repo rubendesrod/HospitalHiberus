@@ -3,7 +3,7 @@ server:
 
 spring:
   datasource:
-    url: jdbc:mysql://${DB_FACTURAS:localhost}:${PORT_MYSQL:3308}/facturas_db?allowPublicKeyRetrieval=true&useSSL=false
+    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3308/facturas_db?allowPublicKeyRetrieval=true&useSSL=false}
     username: facturas_user
     password: facturas_password
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -16,7 +16,7 @@ spring:
         format_sql: true
         dialect: org.hibernate.dialect.MySQLDialect
   kafka:
-    bootstrap-servers: ${HOST_KAFKA:localhost}:9092
+    bootstrap-servers: ${SPRING_KAFKA_SERVER:localhost9092}
     consumer:
       specific-avro-reader: true
       group-id: ${spring.application.name}
@@ -24,7 +24,7 @@ spring:
       properties:
         key.deserializer: io.confluent.kafka.streams.serdes.avro.SpecificAvroDeserializer
         value.deserializer: io.confluent.kafka.streams.serdes.avro.SpecificAvroDeserializer
-        schema.registry.url: http://${HOST_SCHEMA_REGISTRY:localhost}:8081
+        schema.registry.url: ${SPRING_SCHEMA_REGISTRY:http://localhost:8081}
 
 logging:
   level:

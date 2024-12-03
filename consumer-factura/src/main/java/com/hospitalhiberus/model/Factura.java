@@ -20,16 +20,16 @@ public class Factura {
     @Column(name = "id_medico")
     private String idMedico;
 
-    @Column(name = "fecha_emision")
+    @Column(name = "fechaEmision")
     private LocalDate fechaEmision;
 
-    @Column(name = "total_pagar")
+    @Column(name = "totalPagar")
     private Integer totalPagar;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "estado")
     private ESTADOS estado;
 
-    @Column(name = "fecha_pago")
+    @Column(name = "fechaPago")
     private LocalDate fechaPago;
 }

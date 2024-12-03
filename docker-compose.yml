@@ -207,7 +207,42 @@ services:
       - facturas_data:/var/lib/mysql
       - ./init-db/init-db-facturas:/docker-entrypoint-initdb.d
 
-  # Microservicio Medicos
+  #Config Server
+  config-server:
+    build:
+      context: ./config-server
+      dockerfile: Dockerfile
+    container_name: config-server
+    ports:
+      - "8888:8888"
+
+  #Eureka Server
+  eureka-server:
+    build:
+      context: ./eureka-server
+      dockerfile: Dockerfile
+    container_name: eureka-server
+    ports:
+      - "8761:8761"
+
+  #Gateway Server
+  gateway-server:
+    build:
+      context: ./gateway-server
+      dockerfile: Dockerfile
+    container_name: gateway-server
+    ports:
+      - "9000:9000"
+    environment:
+      - SPRING_EUREKA_SERVER_URI=http://eureka-server:8761/eureka
+      - SPRING_ZIPKIN=http://zipkin:9411
+      - SPRING_MEDICOS=http://medicos-service:8082
+    depends_on:
+      - config-server
+      - eureka-server
+      - zipkin
+
+    # Microservicio Medicos
   medicos-service:
     build:
       context: ./medicos
@@ -223,6 +258,139 @@ services:
       - DB_NAME=medicos_db
     depends_on:
       - db_medicos
+
+  #Pacientes_service
+  pacientes-service:
+    build:
+      context: ./pacientes
+      dockerfile: Dockerfile
+    container_name: pacientes-service
+    ports:
+      - "8086:8086"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db_pacientes:5432/pacientes_db
+      - SPRING_CLOUD_CONFIG_URI=http://config-server:8888
+      - SPRING_EUREKA_SERVER_URI=http://eureka-server:8761/eureka
+      - SPRING_ZIPKIN=http://zipkin:9411
+    depends_on:
+      - db_pacientes
+      - eureka-server
+      - config-server
+      - zipkin
+
+  # Citas service
+  citas-service:
+    build:
+      context: ./citas
+      dockerfile: Dockerfile
+    container_name: citas-service
+    ports:
+      - "8083:8083"
+    environment:
+      - MEDICOS_SERVICE_URL=http://medicos-service:8082
+      - SPRING_CLOUD_CONFIG_URI=http://config-server:8888
+      - SPRING_EUREKA_SERVER_URI=http://eureka-server:8761/eureka
+      - SPRING_ZIPKIN=http://zipkin:9411
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db_citas:5432/citas_db
+      - SPRING_SCHEMA_REGISTRY=http://schema-registry:8081
+      - SPRING_KAFKA_SERVER=kafka:29092
+    depends_on:
+      - kafka
+      - schema-registry
+      - zookeeper
+      - db_citas
+      - eureka-server
+      - gateway-server
+      - config-server
+      - zipkin
+
+  # Consultador Facturas Service
+  consultadorfacturas-service:
+    build:
+      context: ./consultador-facturas
+      dockerfile: Dockerfile
+    container_name: consultadorFacturas-service
+    ports:
+      - "8085:8085"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db_facturas:3306/facturas_db?allowPublicKeyRetrieval=true&useSSL=false
+      - SPRING_CLOUD_CONFIG_URI=http://config-server:8888
+      - SPRING_EUREKA_SERVER_URI=http://eureka-server:8761/eureka
+      - SPRING_ZIPKIN=http://zipkin:9411
+    depends_on:
+      - db_facturas
+      - config-server
+      - eureka-server
+      - zipkin
+
+  # Consultador Historial Medico Service
+  consultadorhistorial-service:
+    build:
+      context: ./consultador-historialMedico
+      dockerfile: Dockerfile
+    container_name: consultadorHistorialMedico-service
+    ports:
+      - "8084:8084"
+    environment:
+      - SPRING_CLOUD_CONFIG_URI=http://config-server:8888
+      - SPRING_EUREKA_SERVER_URI=http://eureka-server:8761/eureka
+      - SPRING_ZIPKIN=http://zipkin:9411
+      - SPRING_DATASOURCE_URL=mongodb://historialmedico_user:historialmedico_password@db_historialMedico:27017/historialmedico_db
+    depends_on:
+      - db_historialMedico
+      - zipkin
+      - eureka-server
+      - config-server
+
+  # Conusme Factura service
+  consumerfactura-service:
+    build:
+      context: ./consumer-factura
+      dockerfile: Dockerfile
+    container_name: consumerFactura-service
+    ports:
+      - "8089:8089"
+    environment:
+      - SPRING_CLOUD_CONFIG_URI=http://config-server:8888
+      - SPRING_EUREKA_SERVER_URI=http://eureka-server:8761/eureka
+      - SPRING_ZIPKIN=http://zipkin:9411
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db_facturas:3306/facturas_db?allowPublicKeyRetrieval=true&useSSL=false
+      - SPRING_SCHEMA_REGISTRY=http://schema-registry:8081
+      - SPRING_KAFKA_SERVER=kafka:29092
+    depends_on:
+      - kafka
+      - schema-registry
+      - zookeeper
+      - db_facturas
+      - eureka-server
+      - gateway-server
+      - config-server
+      - zipkin
+
+  # Consumer Historial Medico Service
+  consumerhistorial-service:
+    build:
+      context: ./consumer-historialMedico
+      dockerfile: Dockerfile
+    container_name: consumerHistorial-service
+    ports:
+      - "8088:8088"
+    environment:
+      - SPRING_CLOUD_CONFIG_URI=http://config-server:8888
+      - SPRING_EUREKA_SERVER_URI=http://eureka-server:8761/eureka
+      - SPRING_ZIPKIN=http://zipkin:9411
+      - SPRING_DATASOURCE_URL=mongodb://historialmedico_user:historialmedico_password@db_historialMedico:27017/historialmedico_db
+      - SPRING_SCHEMA_REGISTRY=http://schema-registry:8081
+      - SPRING_KAFKA_SERVER=kafka:29092
+    depends_on:
+      - kafka
+      - schema-registry
+      - zookeeper
+      - db_historialMedico
+      - eureka-server
+      - gateway-server
+      - config-server
+      - zipkin
 
 # Volumenes para la persistencia de los datos en la DB
 volumes:

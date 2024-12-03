@@ -3,7 +3,7 @@ spring:
     name: consumer-factura
   cloud:
     config:
-      uri: http://${HOST_CONFIG_SERVER:localhost}:8888
+      uri: ${SPRING_CLOUD_CONFIG_URI:http://localhost:8888}
 
 # Activo el perfil default para que obtenga la configuración del Config Server
 profiles:

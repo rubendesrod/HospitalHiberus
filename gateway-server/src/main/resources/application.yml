@@ -12,7 +12,7 @@ spring:
           predicates:
             - Path=/pacientes/**
         - id: micro-medicos
-          uri: lb://medicos
+          uri: ${SPRING_MEDICOS:lb://medicos}
           predicates:
             - Path=/medicos/**
         - id: micro-citas
@@ -30,7 +30,13 @@ spring:
     discovery:
       locator:
         enabled: true
+  sleuth:
+    sampler:
+      probability: 1.0 # Captura el 100% de las trazas
+  zipkin:
+    base-url: ${SPRING_ZIPKIN:http://localhost:9411} # Dirección del servicio Zipkin
+
 eureka:
   client:
     service-url:
-      default-zone: http://${EUREKA_HOST:localhost}:8761/eureka
+      defaultZone: ${SPRING_EUREKA_SERVER_URI:http://localhost:8761/eureka}

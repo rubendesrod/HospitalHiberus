@@ -3,7 +3,7 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://${DB_PACIENTES:localhost}:${PORT_POSTGRE:5432}/pacientes_db
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/pacientes_db}
     username: pacientes_user
     password: pacientes_password
     driver-class-name: org.postgresql.Driver
