@@ -12,7 +12,7 @@
 
   <properties>
     <sonar.host.url>http:/localhost:9090</sonar.host.url>
-    <sonar.token>sqa_0d9f281b1f056fb86fc9431db50aa1703f7661b8</sonar.token>
+    <sonar.token>sqa_9500fdec2acdd4c8745ca8de151f7baa1875a6ad</sonar.token>
     <sonar.sources>src/main/java</sonar.sources>
     <sonar.tests>src/test/java</sonar.tests>
   </properties>
